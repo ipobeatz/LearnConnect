@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.android.learnconnect"
     compileSdk = 34
 
@@ -21,6 +22,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -28,7 +30,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
+
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -51,7 +55,10 @@ android {
             isIncludeAndroidResources = true
         }
     }
+    buildToolsVersion = "34.0.0"
+
 }
+
 
 dependencies {
     implementation(libs.bundles.androidxCore)
