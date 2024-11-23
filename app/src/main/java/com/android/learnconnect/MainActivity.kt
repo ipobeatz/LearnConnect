@@ -1,6 +1,7 @@
 package com.android.learnconnect
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +19,8 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
-class MainActivity  @Inject constructor() : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    private val _googleSignInAccount = MutableLiveData<GoogleSignInAccount>()
-    val googleSignInAccount: LiveData<GoogleSignInAccount> = _googleSignInAccount
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +28,28 @@ class MainActivity  @Inject constructor() : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // FragmentContainerView yüklendikten sonra NavController'a erişim
+        binding.root.post {
+            val navController = findNavController(R.id.nav_host_fragment_activity_main)
+            binding.navView.setupWithNavController(navController)
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_explore, R.id.navigation_my_course, R.id.navigation_favorite_course
-            )
-        )
+            // Kullanıcının giriş durumu
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            if (currentUser != null) {
+                navController.navigate(R.id.homeFragment) // Sadece oturum açıkken yönlendirme yap
+            }
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
+            // Navigation Listener
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.homeFragment, R.id.myCourseFragment, R.id.profileFragment -> {
+                        binding.navView.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        binding.navView.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
 }

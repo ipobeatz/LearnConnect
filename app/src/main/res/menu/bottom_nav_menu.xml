@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_explore"
+        android:id="@+id/homeFragment"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Keşfet" />
 
     <item
-        android:id="@+id/navigation_my_course"
+        android:id="@+id/myCourseFragment"
         android:icon="@drawable/explore_icon"
         android:title="Kurslarım" />
 
     <item
-        android:id="@+id/navigation_favorite_course"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/favorite_icon"
-        android:title="Favori Kurslar" />
+        android:title="Profil" />
 
 </menu>
