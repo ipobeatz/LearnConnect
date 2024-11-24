@@ -1,4 +1,4 @@
-package com.android.learnconnect
+package com.android.learnconnect.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -49,7 +50,7 @@ class LoginFragment : Fragment() {
                         // Başarılı giriş
                         Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
                         // Başka bir fragment'e yönlendirme (örnek: HomeFragment)
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_exploreFragment)
                     } else {
                         // Başarısız giriş
                         Toast.makeText(

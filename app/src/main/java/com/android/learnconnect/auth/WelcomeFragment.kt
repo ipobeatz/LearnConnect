@@ -1,4 +1,4 @@
-package com.android.learnconnect
+package com.android.learnconnect.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {

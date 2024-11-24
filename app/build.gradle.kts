@@ -5,6 +5,7 @@ plugins {
     id(libs.plugins.kotlin.kapt.get().pluginId)
     alias(libs.plugins.paparazzi)
     id("com.google.gms.google-services")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -63,6 +64,8 @@ android {
 dependencies {
     implementation(libs.bundles.androidxCore)
     implementation(libs.bundles.lifecycle)
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    kapt ("com.github.bumptech.glide:compiler:4.15.1")
     implementation(libs.bundles.compose)
     implementation(libs.bundles.composeAdditional)
     implementation(libs.bundles.navigation)
@@ -72,6 +75,7 @@ dependencies {
     implementation(libs.androidx.media3.session)
     implementation(libs.firebase.auth.ktx)
     kapt(libs.bundles.hiltKapt)
+    implementation ("com.google.android.flexbox:flexbox:3.0.0")
     annotationProcessor(libs.hiltCompiler)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)

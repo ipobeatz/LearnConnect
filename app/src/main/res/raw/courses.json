@@ -1,0 +1,112 @@
+[
+  {
+    "id": "1",
+    "name": "Introduction to Design",
+    "description": "Learn the basics of design and improve your skills.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": true,
+    "videos": [],
+    "rating": 2.5,
+    "coursePrice": 49.99,
+    "category": "Tasarım ve Yaratıcılık"
+  },
+  {
+    "id": "2",
+    "name": "Advanced Java Programming",
+    "description": "Master Java programming concepts and techniques.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": false,
+    "videos": [],
+    "rating": 4.0,
+    "coursePrice": 39.99,
+    "category": "Yazılım Geliştirme"
+  },
+  {
+    "id": "3",
+    "name": "Data Science Essentials",
+    "description": "An essential guide to the field of data science.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": true,
+    "videos": [],
+    "rating": 4.8,
+    "coursePrice": 59.99,
+    "category": "BT ve Yazılım"
+  },
+  {
+    "id": "4",
+    "name": "Marketing Mastery",
+    "description": "Learn advanced marketing strategies.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": true,
+    "videos": [],
+    "rating": 4.2,
+    "coursePrice": 44.99,
+    "category": "Pazarlama"
+  },
+  {
+    "id": "5",
+    "name": "Photography 101",
+    "description": "Capture stunning photos with this beginner's guide.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": false,
+    "videos": [],
+    "rating": 4.3,
+    "coursePrice": 29.99,
+    "category": "Tasarım ve Yaratıcılık"
+  },
+  {
+    "id": "6",
+    "name": "UI/UX Design Fundamentals",
+    "description": "Understand the principles of effective UI/UX design.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": false,
+    "videos": [],
+    "rating": 4.7,
+    "coursePrice": 54.99,
+    "category": "Tasarım ve Yaratıcılık"
+  },
+  {
+    "id": "7",
+    "name": "Web Development Bootcamp",
+    "description": "Build websites with HTML, CSS, and JavaScript.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": true,
+    "videos": [],
+    "rating": 4.9,
+    "coursePrice": 79.99,
+    "category": "Yazılım Geliştirme"
+  },
+  {
+    "id": "8",
+    "name": "Artificial Intelligence Basics",
+    "description": "Explore the fundamentals of AI and machine learning.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": false,
+    "videos": [],
+    "rating": 4.6,
+    "coursePrice": 64.99,
+    "category": "BT ve Yazılım"
+  },
+  {
+    "id": "9",
+    "name": "Mobile App Development with Kotlin",
+    "description": "Create mobile apps using Kotlin for Android.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": true,
+    "videos": [],
+    "rating": 4.4,
+    "coursePrice": 59.99,
+    "category": "Yazılım Geliştirme"
+  },
+  {
+    "id": "10",
+    "name": "Cybersecurity Essentials",
+    "description": "Understand the basics of cybersecurity and how to protect systems.",
+    "imageUrl": "https://via.placeholder.com/150",
+    "isRegistered": false,
+    "videos": [],
+    "rating": 4.1,
+    "coursePrice": 34.99,
+    "category": "BT ve Yazılım"
+  }
+]

@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.learnconnect.LoginFragment"
+        android:name="com.android.learnconnect.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
 
     <action
-        android:id="@+id/action_loginFragment_to_homeFragment"
-        app:destination="@id/homeFragment" />
+        android:id="@+id/action_loginFragment_to_exploreFragment"
+        app:destination="@id/exploreFragment" />
 
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.android.learnconnect.RegisterFragment"
+        android:name="com.android.learnconnect.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.android.learnconnect.WelcomeFragment"
+        android:name="com.android.learnconnect.auth.WelcomeFragment"
         android:label="Welcome"
         tools:layout="@layout/fragment_welcome">
 
@@ -38,16 +38,19 @@
             app:destination="@id/registerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.android.learnconnect.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/exploreFragment"
+        android:name="com.android.learnconnect.exploreScreen.fragments.ExploreFragment"
+        tools:layout="@layout/fragment_explore">
+        <action
+            android:id="@+id/action_exploreFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/myCourseFragment"
-        android:name="com.android.learnconnect.ExploreFragment"
+        android:name="com.android.learnconnect.myCourseScreen.MyCourseFragment"
         android:label="Explore"
-        tools:layout="@layout/fragment_explore" />
+        tools:layout="@layout/fragment_my_course" />
 
     <fragment
         android:id="@+id/profileFragment"
@@ -60,4 +63,53 @@
         app:destination="@id/welcomeFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.android.learnconnect.exploreScreen.fragments.CourseDetailFragment"
+        tools:layout="@layout/fragment_course_detail">
+        <argument
+            android:name="courseName"
+            app:argType="string" />
+        <argument
+            android:name="courseDescription"
+            app:argType="string" />
+        <argument
+            android:name="courseImageUrl"
+            app:argType="string" />
+        <argument
+            android:name="coursePrice"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showAllCategoriesFragment"
+        android:name="com.android.learnconnect.exploreScreen.fragments.ShowAllCategoriesFragment"
+        tools:layout="@layout/fragment_show_all_categories">
+    </fragment>
+
+    <action
+        android:id="@+id/action_exploreFragment_to_showAllCategoriesFragment"
+        app:destination="@id/showAllCategoriesFragment" />
+
+
+    <fragment
+        android:id="@+id/filteredCoursesFragment"
+        android:name="com.android.learnconnect.exploreScreen.FilteredCoursesFragment"
+        android:label="Filtered Courses"
+        tools:layout="@layout/fragment_filtered_courses">
+
+        <!-- Argüman tanımı -->
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+
+        <argument
+            android:name="filteredCourses"
+            app:argType="string" />
+    </fragment>
+
+    <!-- ExploreFragment'ten FilteredCoursesFragment'e geçiş için action -->
+    <action
+        android:id="@+id/action_exploreFragment_to_filteredCoursesFragment"
+        app:destination="@id/filteredCoursesFragment" />
 </navigation>

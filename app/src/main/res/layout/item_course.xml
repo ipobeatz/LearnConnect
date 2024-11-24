@@ -1,0 +1,113 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+
+
+    <!-- İçerik (Kurs bilgileri) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+
+
+        <ImageView
+            android:id="@+id/courseImage"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/studio" />
+
+
+
+        <TextView
+            android:id="@+id/courseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Course Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/courseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Course description here..."
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:ellipsize="none" />
+
+        <!-- Yıldız ve Rating kısmı -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/courseRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5/5"
+                android:layout_marginRight="5dp"
+                android:textSize="12sp"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/btn_star"
+                android:layout_marginEnd="2dp" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/btn_star"
+                android:layout_marginEnd="2dp" />
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/btn_star"
+                android:layout_marginEnd="2dp" />
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/btn_star"
+                android:layout_marginEnd="2dp" />
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/btn_star_big_off" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/coursePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="$50"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
