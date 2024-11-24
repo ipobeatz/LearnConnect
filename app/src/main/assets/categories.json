@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Yazılım Geliştirme",
+    "description": "Programlama dilleri ve araçları hakkında eğitim içerikleri."
+  },
+  {
+    "id": "2",
+    "title": "BT ve Yazılım",
+    "description": "Bilgi teknolojileri ve yazılım çözümleri."
+  },
+  {
+    "id": "3",
+    "title": "Kişisel Gelişim",
+    "description": "Zaman yönetimi, liderlik ve daha fazlası."
+  },
+  {
+    "id": "4",
+    "title": "İş",
+    "description": "İş dünyası için stratejik rehberlik ve beceriler."
+  },
+  {
+    "id": "5",
+    "title": "Finans ve Muhasebe",
+    "description": "Finans yönetimi ve muhasebe teknikleri."
+  },
+  {
+    "id": "6",
+    "title": "Ofiste Verimlilik",
+    "description": "Ofis ortamında daha etkili çalışmanın yolları."
+  },
+  {
+    "id": "7",
+    "title": "Tasarım ve Yaratıcılık",
+    "description": "Tasarım araçları ve yaratıcı süreçler üzerine eğitim."
+  },
+  {
+    "id": "8",
+    "title": "E-ticaret Stratejileri",
+    "description": "Online ticaretin temelleri ve başarılı stratejiler."
+  }
+]

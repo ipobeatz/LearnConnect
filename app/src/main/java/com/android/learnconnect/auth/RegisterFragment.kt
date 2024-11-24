@@ -9,8 +9,11 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.android.learnconnect.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class RegisterFragment : Fragment() {
+@AndroidEntryPoint
+class RegisterFragment @Inject constructor() : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!

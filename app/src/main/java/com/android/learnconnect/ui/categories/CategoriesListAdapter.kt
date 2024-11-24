@@ -1,4 +1,4 @@
-package com.android.learnconnect.exploreScreen.adapters
+package com.android.learnconnect.ui.categories
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.learnconnect.R
-import com.android.learnconnect.exploreScreen.models.Category
+import com.android.learnconnect.domain.entity.Category
 
 class CategoriesListAdapter(
     private val categories: List<Category>,

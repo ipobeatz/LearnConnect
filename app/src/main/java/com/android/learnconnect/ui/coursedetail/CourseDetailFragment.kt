@@ -1,4 +1,4 @@
-package com.android.learnconnect.exploreScreen.fragments
+package com.android.learnconnect.ui.coursedetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,25 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.android.learnconnect.R
-import com.bumptech.glide.Glide
-
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.android.learnconnect.R
+import com.android.learnconnect.ui.profile.ProfileViewModel
+import com.bumptech.glide.RequestManager
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class CourseDetailFragment : Fragment() {
+@AndroidEntryPoint
+class CourseDetailFragment @Inject constructor() : Fragment() {
 
+    private val viewModel: CourseDetailViewModel by viewModels()
     private val args: CourseDetailFragmentArgs by navArgs()
 
+    @Inject
+    lateinit var glide: RequestManager
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_course_detail, container, false)
     }
@@ -39,9 +46,6 @@ class CourseDetailFragment : Fragment() {
         courseNameTextView.text = courseName
         courseDescriptionTextView.text = courseDescription
         coursePriceTextView.text = coursePrice
-        Glide.with(this)
-            .load(courseImageUrl)
-            .placeholder(R.drawable.studio)
-            .into(courseImageView)
+        glide.load(courseImageUrl).placeholder(R.drawable.studio).into(courseImageView)
     }
 }

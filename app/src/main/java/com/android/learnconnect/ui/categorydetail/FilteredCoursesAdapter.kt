@@ -1,4 +1,4 @@
-package com.android.learnconnect.exploreScreen
+package com.android.learnconnect.ui.categorydetail
 
 
 import android.view.LayoutInflater
@@ -8,11 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.learnconnect.R
-import com.android.learnconnect.exploreScreen.models.Course
+import com.android.learnconnect.domain.entity.Course
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 
 class FilteredCoursesAdapter(
     private val courses: List<Course>,
+    private val glide: RequestManager,
     private val onItemClick: (Course) -> Unit
 ) : RecyclerView.Adapter<FilteredCoursesAdapter.FilteredCourseViewHolder>() {
 
@@ -27,13 +29,10 @@ class FilteredCoursesAdapter(
             courseDescription.text = course.description
             coursePrice.text = "$${course.coursePrice}"
 
-            // Glide ile resmi yükle
-            Glide.with(itemView.context)
-                .load(course.imageUrl)
+            glide.load(course.imageUrl)
                 .placeholder(R.drawable.studio) // Yer tutucu resim
                 .into(courseImage)
 
-            // Tıklama işlemi
             itemView.setOnClickListener {
                 onItemClick(course)
             }
@@ -41,7 +40,8 @@ class FilteredCoursesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilteredCourseViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.filtered_item_course, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.filtered_item_course, parent, false)
         return FilteredCourseViewHolder(view)
     }
 

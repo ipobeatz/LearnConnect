@@ -1,4 +1,4 @@
-package com.android.learnconnect
+package com.android.learnconnect.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentProfileBinding
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class ProfileFragment : Fragment() {
+@AndroidEntryPoint
+class ProfileFragment @Inject constructor() : Fragment() {
+
+    private val viewModel: ProfileViewModel by viewModels()
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
@@ -26,12 +32,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Logout butonuna tıklama işlemi
         binding.btnLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut() // Firebase'den çıkış yap
+            viewModel.performSignOut()
             Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
-
-            // Kullanıcıyı WelcomeFragment'e yönlendir
             findNavController().navigate(R.id.action_profileFragment_to_welcomeFragment)
         }
     }

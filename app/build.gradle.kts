@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.paparazzi)
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs.kotlin")
+    kotlin(libs.plugins.plugin.serializaton.get().pluginId)
 }
 
 android {
@@ -84,5 +85,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.testManifest)
     testImplementation(libs.bundles.testing)
     androidTestImplementation(libs.bundles.uiTesting)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidxAppcompat)
+    implementation(libs.bundles.hilt)
+    androidTestImplementation(libs.bundles.testing)
 
 }

@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentWelcomeBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class WelcomeFragment : Fragment() {
+@AndroidEntryPoint
+class WelcomeFragment @Inject constructor() : Fragment() {
 
     // View Binding değişkeni
     private var _binding: FragmentWelcomeBinding? = null

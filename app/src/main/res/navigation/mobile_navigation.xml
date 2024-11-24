@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
-        android:name="com.android.learnconnect.exploreScreen.fragments.ExploreFragment"
+        android:name="com.android.learnconnect.ui.explore.ExploreFragment"
         tools:layout="@layout/fragment_explore">
         <action
             android:id="@+id/action_exploreFragment_to_courseDetailFragment"
@@ -48,13 +48,13 @@
 
     <fragment
         android:id="@+id/myCourseFragment"
-        android:name="com.android.learnconnect.myCourseScreen.MyCourseFragment"
+        android:name="com.android.learnconnect.ui.mycourse.MyCourseFragment"
         android:label="Explore"
         tools:layout="@layout/fragment_my_course" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.android.learnconnect.ProfileFragment"
+        android:name="com.android.learnconnect.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" >
 
@@ -65,7 +65,7 @@
 
     <fragment
         android:id="@+id/courseDetailFragment"
-        android:name="com.android.learnconnect.exploreScreen.fragments.CourseDetailFragment"
+        android:name="com.android.learnconnect.ui.coursedetail.CourseDetailFragment"
         tools:layout="@layout/fragment_course_detail">
         <argument
             android:name="courseName"
@@ -83,8 +83,14 @@
 
     <fragment
         android:id="@+id/showAllCategoriesFragment"
-        android:name="com.android.learnconnect.exploreScreen.fragments.ShowAllCategoriesFragment"
+        android:name="com.android.learnconnect.ui.categories.ShowAllCategoriesFragment"
+        android:label="All Categories"
         tools:layout="@layout/fragment_show_all_categories">
+
+
+        <action
+            android:id="@+id/action_showAllCategoriesFragment_to_filteredCoursesFragment"
+            app:destination="@id/filteredCoursesFragment" />
     </fragment>
 
     <action
@@ -94,18 +100,18 @@
 
     <fragment
         android:id="@+id/filteredCoursesFragment"
-        android:name="com.android.learnconnect.exploreScreen.FilteredCoursesFragment"
+        android:name="com.android.learnconnect.ui.categorydetail.FilteredCoursesFragment"
         android:label="Filtered Courses"
         tools:layout="@layout/fragment_filtered_courses">
 
-        <!-- Argüman tanımı -->
         <argument
             android:name="categoryName"
             app:argType="string" />
 
         <argument
-            android:name="filteredCourses"
-            app:argType="string" />
+            app:argType="java.io.Serializable"
+            app:nullable="true"
+            android:name="filteredCourseDataList" />
     </fragment>
 
     <!-- ExploreFragment'ten FilteredCoursesFragment'e geçiş için action -->

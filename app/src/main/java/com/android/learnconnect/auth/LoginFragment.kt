@@ -10,9 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class LoginFragment : Fragment() {
+@AndroidEntryPoint
+class LoginFragment @Inject constructor() : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
