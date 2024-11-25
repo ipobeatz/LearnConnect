@@ -8,7 +8,7 @@ data class Course(
     val name: String,
     val description: String,
     val imageUrl: String,
-    val isRegistered: Boolean,
+    var isRegistered: Boolean,
     val videos: List<String>,
     val rating: Float,
     val coursePrice : Float,

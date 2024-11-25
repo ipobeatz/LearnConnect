@@ -3,6 +3,8 @@ androidxCore = "1.12.0"
 androidxAppcompat = "1.6.1"
 coilCompose = "2.5.0"
 datastore = "1.0.0"
+exoplayerUi = "2.19.1"
+exoplayerVersion = "2.18.1"
 firebaseBom = "33.6.0"
 googleMaterial = "1.11.0"
 androidxConstraintLayout = "2.1.4"
@@ -53,6 +55,8 @@ androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "d
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidxAppcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
 coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayerUi" }
+exoplayer-v2181 = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayerVersion" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 googleMaterial = { module = "com.google.android.material:material", version.ref = "googleMaterial" }

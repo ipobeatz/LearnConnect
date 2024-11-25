@@ -90,4 +90,7 @@ dependencies {
     implementation(libs.bundles.hilt)
     androidTestImplementation(libs.bundles.testing)
 
+    implementation (libs.exoplayer.v2181)
+    implementation (libs.exoplayer.ui)
+
 }

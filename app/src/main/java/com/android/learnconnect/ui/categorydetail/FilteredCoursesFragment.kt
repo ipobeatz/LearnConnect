@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.learnconnect.R
@@ -47,8 +48,15 @@ class FilteredCoursesFragment @Inject constructor() : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = courses?.let {
             FilteredCoursesAdapter(it, glide = glide) { course ->
-                Toast.makeText(requireContext(), "Selected: ${course.name}", Toast.LENGTH_SHORT)
-                    .show()
+                val action = FilteredCoursesFragmentDirections
+                    .actionFilteredCoursesFragmentToCourseDetailFragment(
+                        courseName = course.name,
+                        courseDescription = course.description,
+                        courseImageUrl = course.imageUrl,
+                        coursePrice = course.coursePrice.toString(),
+                        isRegistered = course.isRegistered
+                    )
+                findNavController().navigate(action)
             }
         }
     }

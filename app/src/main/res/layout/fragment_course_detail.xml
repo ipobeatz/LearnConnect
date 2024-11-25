@@ -70,7 +70,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom "Enroll" Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/enrollButton"
         android:layout_width="match_parent"

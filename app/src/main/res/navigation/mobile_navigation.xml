@@ -67,6 +67,8 @@
         android:id="@+id/courseDetailFragment"
         android:name="com.android.learnconnect.ui.coursedetail.CourseDetailFragment"
         tools:layout="@layout/fragment_course_detail">
+
+        <!-- Argument Tanımları -->
         <argument
             android:name="courseName"
             app:argType="string" />
@@ -79,7 +81,21 @@
         <argument
             android:name="coursePrice"
             app:argType="string" />
+        <argument
+            android:name="isRegistered"
+            app:argType="boolean" />
+
+        <!-- CourseContentFragment'e geçiş -->
+        <action
+            android:id="@+id/action_courseDetailFragment_to_courseContentFragment"
+            app:destination="@id/courseContentFragment" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/courseContentFragment"
+        android:name="com.android.learnconnect.ui.coursecontent.CourseContentFragment"
+        tools:layout="@layout/fragment_course_content" />
 
     <fragment
         android:id="@+id/showAllCategoriesFragment"
@@ -112,6 +128,10 @@
             app:argType="java.io.Serializable"
             app:nullable="true"
             android:name="filteredCourseDataList" />
+
+        <action
+            android:id="@+id/action_filteredCoursesFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment"/>
     </fragment>
 
     <!-- ExploreFragment'ten FilteredCoursesFragment'e geçiş için action -->

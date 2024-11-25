@@ -49,4 +49,5 @@ class MainActivity : AppCompatActivity() {
         // BottomNavigation ile NavController bağlantısı
         binding.navView.setupWithNavController(navController)
     }
+
 }

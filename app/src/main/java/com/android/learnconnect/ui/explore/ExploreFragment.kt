@@ -94,12 +94,12 @@ class ExploreFragment @Inject constructor() : Fragment() {
                 courseName = course.name,
                 courseDescription = course.description,
                 courseImageUrl = course.imageUrl,
-                coursePrice = "$${course.coursePrice}"
+                coursePrice = "$${course.coursePrice}",
+                isRegistered = course.isRegistered // Buraya ekleyin
             )
             findNavController().navigate(action)
         }
     }
-
     private fun setupCategoryUI(categories: List<Category>) {
         val categoriesRecyclerView = requireView().findViewById<RecyclerView>(R.id.categoriesRecyclerView)
         categoriesRecyclerView.layoutManager =

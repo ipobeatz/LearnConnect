@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "title": "ChatGpt Log in",
+    "duration": "00:47",
+    "videoUrl": "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
+  },
+  {
+    "id": "2",
+    "title": "Çalışma Kitabı ve Çalışma Sayfası Ekle",
+    "duration": "10:04",
+    "videoUrl": "https://example.com/video2.mp4"
+  },
+  {
+    "id": "3",
+    "title": "Çalışma Sayfalarını Yönetelim",
+    "duration": "04:58",
+    "videoUrl": "https://example.com/video3.mp4"
+  },
+  {
+    "id": "4",
+    "title": "Hücreleri Yönetelim",
+    "duration": "04:25",
+    "videoUrl": "https://example.com/video4.mp4"
+  },
+  {
+    "id": "5",
+    "title": "Yapı Oluşturalım",
+    "duration": "07:09",
+    "videoUrl": "https://example.com/video5.mp4"
+  },
+  {
+    "id": "6",
+    "title": "Gerçek Hayata Dair Problemlerimizi Çözelim",
+    "duration": "06:48",
+    "videoUrl": "https://example.com/video6.mp4"
+  }
+]
