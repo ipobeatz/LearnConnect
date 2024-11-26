@@ -38,4 +38,16 @@ class CourseDataSource @Inject constructor(
     override suspend fun getRegisteredCourse(): ResultData<List<Course>> {
         return ResultData.Success(courseDao.getRegisteredCourseList())
     }
+
+    override suspend fun setFavoriteCourse(courseId: String, isFavorite: Boolean): ResultData<*> {
+        return try {
+            ResultData.Success(courseDao.setFavoriteCourse(courseId, isFavorite))
+        } catch (e: Exception) {
+            ResultData.Error(e)
+        }
+    }
+
+    override suspend fun getFavoriteCourseList(): ResultData<List<Course>> {
+        return ResultData.Success(courseDao.getFavoriteCourseList())
+    }
 }

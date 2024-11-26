@@ -22,6 +22,12 @@ interface CourseDao {
     @Query("SELECT * FROM courses WHERE isRegistered = 1")
     suspend fun getRegisteredCourseList(): List<Course>
 
+    @Query("UPDATE courses SET isFavorite = :isFavorite WHERE id = :courseId")
+    suspend fun setFavoriteCourse(courseId: String, isFavorite: Boolean)
+
+    @Query("SELECT * FROM courses WHERE isFavorite = 1")
+    suspend fun getFavoriteCourseList(): List<Course>
+
     @Query("SELECT * FROM courses WHERE LOWER(category) LIKE '%' || LOWER(:categoryName) || '%'")
     suspend fun filterCourseByCategory(categoryName: String): List<Course>
 

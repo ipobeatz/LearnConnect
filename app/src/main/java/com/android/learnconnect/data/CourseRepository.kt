@@ -1,10 +1,7 @@
 package com.android.learnconnect.data
 
-import androidx.room.Query
-import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
-import kotlinx.coroutines.flow.Flow
 
 interface CourseRepository {
     suspend fun getAllCourseList(): ResultData<List<Course>>
@@ -18,5 +15,9 @@ interface CourseRepository {
     suspend fun searchCoursesByKeyword(keyword: String): ResultData<List<Course>>
 
     suspend fun getRegisteredCourse(): ResultData<List<Course>>
+
+    suspend fun setFavoriteCourse(courseId: String, isFavorite: Boolean): ResultData<*>
+
+    suspend fun getFavoriteCourseList(): ResultData<List<Course>>
 
 }

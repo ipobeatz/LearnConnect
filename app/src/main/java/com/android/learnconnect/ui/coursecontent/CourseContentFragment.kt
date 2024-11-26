@@ -24,6 +24,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.InputStreamReader
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
+
 
 @AndroidEntryPoint
 class CourseContentFragment : Fragment() {
@@ -64,8 +69,7 @@ class CourseContentFragment : Fragment() {
                 currentVideoIndex = videoList.indexOf(video)
             },
             onDownloadClick = { video ->
-                Toast.makeText(requireContext(), "${video.title} indiriliyor...", Toast.LENGTH_SHORT).show()
-                // İndirme işlemini burada başlatabilirsiniz.
+                downloadVideo(requireContext(), video.videoUrl, video.title)
             }
         )
 
@@ -132,6 +136,29 @@ class CourseContentFragment : Fragment() {
                 player?.playbackParameters = params
             }
             .show()
+    }
+
+    private fun downloadVideo(context: Context, videoUrl: String, videoTitle: String) {
+        try {
+            val request = DownloadManager.Request(Uri.parse(videoUrl)).apply {
+                setTitle(videoTitle)
+                setDescription("Video indiriliyor...")
+                setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                setDestinationInExternalPublicDir(
+                    Environment.DIRECTORY_DOWNLOADS,
+                    "$videoTitle.mp4"
+                )
+                setAllowedOverMetered(true)
+                setAllowedOverRoaming(true)
+            }
+
+            val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            downloadManager.enqueue(request)
+
+            Toast.makeText(context, "$videoTitle indiriliyor...", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(context, "İndirme başarısız oldu: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun toggleFullscreen() {

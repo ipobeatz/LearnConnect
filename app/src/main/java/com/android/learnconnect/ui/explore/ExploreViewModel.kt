@@ -8,6 +8,7 @@ import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
 import com.android.learnconnect.domain.usecase.FilterCourseByCategoryNameUseCase
+import com.android.learnconnect.domain.usecase.SetFavoriteCourseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class ExploreViewModel @Inject constructor(
     private val getCourseListUseCase: GetCourseListUseCase,
     private val getCategoryListUseCase: GetCategoryListUseCase,
-    private val filterCourseByCategoryNameUseCase: FilterCourseByCategoryNameUseCase
+    private val filterCourseByCategoryNameUseCase: FilterCourseByCategoryNameUseCase,
+    private val setFavoriteCourseUseCase: SetFavoriteCourseUseCase
 ) : ViewModel() {
 
     private val _courseListData: MutableStateFlow<ResultData<List<Course>>> =
@@ -61,6 +63,13 @@ class ExploreViewModel @Inject constructor(
             filterCourseByCategoryNameUseCase(category).collect {
                 _filteredCourseListData.value = it
             }
+        }
+    }
+
+    fun setCourseFavorite(courseId: String, isFavorite: Boolean) {
+        _filteredCourseListData.value = ResultData.Loading()
+        viewModelScope.launch {
+            setFavoriteCourseUseCase(courseId, isFavorite)
         }
     }
 }

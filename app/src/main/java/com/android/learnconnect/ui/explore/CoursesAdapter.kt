@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide
 
 class CoursesAdapter(
     private val courses: List<Course>,
-    private val onItemClick: (Course) -> Unit
+    private val onItemClick: (Course) -> Unit,
+    private val onFavoriteClick: (Course) -> Unit
 ) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,11 +37,15 @@ class CoursesAdapter(
                 .into(courseImage)
 
             // Favoriler butonuna tıklama işlemi
+            favoriteButton.setImageResource(
+                if (course.isFavorite) R.drawable.love_svgrepo_com_2 else R.drawable.love_svgrepo_com
+            )
+
+            // Favori butonuna tıklama işlemi
             favoriteButton.setOnClickListener {
-                course.isRegistered = !course.isRegistered
-                favoriteButton.setImageResource(
-                    if (course.isRegistered) R.drawable.favorite_icon else R.drawable.fullstar
-                )
+                course.isFavorite = !course.isFavorite
+                notifyItemChanged(adapterPosition)
+                onFavoriteClick(course) // Callback ile ViewModel'e bildir
             }
 
 

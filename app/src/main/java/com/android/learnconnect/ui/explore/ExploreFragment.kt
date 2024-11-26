@@ -79,7 +79,7 @@ class ExploreFragment @Inject constructor() : Fragment() {
                         }
 
                         is ResultData.Loading -> {
-                            (requireActivity() as MainActivity).showLoading()
+                            //(requireActivity() as MainActivity).showLoading()
                         }
                     }
                 }
@@ -106,29 +106,61 @@ class ExploreFragment @Inject constructor() : Fragment() {
             }
         }
     }
-
     private fun setupCourseUI(courses: List<Course>) {
-        courseListData = courses
         val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView)
         coursesRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        coursesRecyclerView.adapter = CoursesAdapter(courses) { course ->
-            val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
-                courseId = course.id
-            )
-            findNavController().navigate(action)
-        }
+
+        coursesRecyclerView.adapter = CoursesAdapter(
+            courses,
+            onItemClick = { course ->
+                val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
+                    courseId = course.id
+                )
+                findNavController().navigate(action)
+            },
+            onFavoriteClick = { course ->
+                // Favori durumu doğru yansıtılıyor
+                if (course.isFavorite) {
+                    viewModel.setCourseFavorite(course.id, true)
+                    Toast.makeText(requireContext(), "${course.name} favorilere eklendi.", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.setCourseFavorite(course.id, false)
+                    Toast.makeText(requireContext(), "${course.name} favorilerden kaldırıldı.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
     }
 
     private fun setupCourseUI2(courses: List<Course>) {
-        val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView2)
-        coursesRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        coursesRecyclerView.adapter = CoursesAdapter(courses) { course ->
-            val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
-                courseId = course.id
+        if (courses.isNotEmpty()) {
+            val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView2)
+            coursesRecyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+            coursesRecyclerView.adapter = CoursesAdapter(
+                courses,
+                onItemClick = { course ->
+                    // Kurs detayına git
+                    val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
+                        courseId = course.id
+                    )
+                    findNavController().navigate(action)
+                },
+                onFavoriteClick = { course ->
+                    // Favori durumu değiştirildiğinde çağrılır
+                    viewModel.setCourseFavorite(course.id, course.isFavorite)
+                    val message = if (course.isFavorite) {
+                        "${course.name} favorilere eklendi."
+                    } else {
+                        "${course.name} favorilerden kaldırıldı."
+                    }
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
             )
-            findNavController().navigate(action)
+        } else {
+            // Eğer liste boşsa yapılacaklar
+            Toast.makeText(requireContext(), "Kurs listesi boş", Toast.LENGTH_SHORT).show()
         }
     }
 

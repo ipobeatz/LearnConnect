@@ -14,10 +14,10 @@ data class Course(
     val name: String,
     val description: String,
     val imageUrl: String,
-    var isRegistered: Boolean,
+    var isRegistered: Boolean = false,
+    var isFavorite: Boolean = false,
     val rating: Float,
     val coursePrice : Float,
     val category: String,
     val videoItem: List<VideoItem>
-
 )

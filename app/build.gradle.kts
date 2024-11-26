@@ -89,7 +89,7 @@ dependencies {
     implementation(libs.androidxAppcompat)
     implementation(libs.bundles.hilt)
     androidTestImplementation(libs.bundles.testing)
-
+    implementation (libs.okhttp)
     implementation (libs.exoplayer.v2181)
     implementation (libs.exoplayer.ui)
     implementation(libs.room.runtime)
