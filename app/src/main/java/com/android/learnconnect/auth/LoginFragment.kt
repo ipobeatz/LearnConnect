@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentLoginBinding
@@ -52,7 +53,11 @@ class LoginFragment @Inject constructor() : Fragment() {
                         // Başarılı giriş
                         Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
                         // Başka bir fragment'e yönlendirme (örnek: HomeFragment)
-                        findNavController().navigate(R.id.action_loginFragment_to_exploreFragment)
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.welcomeFragment, true) // loginFragment'a kadar olan tüm fragmentları dahil ederek stack'ten çıkar
+                            .build()
+
+                        findNavController().navigate(R.id.action_loginFragment_to_exploreFragment, null, navOptions)
                     } else {
                         // Başarısız giriş
                         Toast.makeText(

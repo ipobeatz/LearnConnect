@@ -46,6 +46,7 @@ class RegisterFragment @Inject constructor() : Fragment() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(requireContext(), "Account created successfully", Toast.LENGTH_SHORT).show()
+                        this.requireActivity().onBackPressed()
                     } else {
                         Toast.makeText(requireContext(), "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }

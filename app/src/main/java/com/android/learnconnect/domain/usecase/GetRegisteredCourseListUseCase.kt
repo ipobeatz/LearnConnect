@@ -7,10 +7,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetCourseListUseCase @Inject constructor(
+class GetRegisteredCourseListUseCase @Inject constructor(
     private val repository: CourseRepository
 ) {
     suspend operator fun invoke(): Flow<ResultData<List<Course>>> = flow {
-        emit(repository.getAllCourseList())
+        emit(ResultData.Loading()) // Verinin yüklenme durumunu göster
+        try {
+            val courses = repository.getRegisteredCourse() // Parametre olmadan çağır
+            emit(repository.getRegisteredCourse())
+        } catch (e: Exception) {
+            emit(ResultData.Error(e)) // Hata durumunu işleyin
+        }
     }
 }

@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                 />
+                />
 
             <!-- Popüler Kurslar Başlığı -->
             <TextView
@@ -92,22 +92,20 @@
                 android:id="@+id/popularCoursesTitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:text="Popular Courses in Design"
+                android:layout_marginTop="16dp"
+                android:text="Popular Courses in Software"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textStyle="bold" />
 
-            <!-- Popüler Kurslar (Horizontal RecyclerView) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popularCoursesRecyclerView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="0dp"
                 android:layout_marginTop="4dp"
                 android:clipToPadding="false"
-                android:paddingEnd="32dp"
                 android:orientation="horizontal"
 
                 />

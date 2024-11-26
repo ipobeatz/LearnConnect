@@ -92,5 +92,7 @@ dependencies {
 
     implementation (libs.exoplayer.v2181)
     implementation (libs.exoplayer.ui)
-
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 }

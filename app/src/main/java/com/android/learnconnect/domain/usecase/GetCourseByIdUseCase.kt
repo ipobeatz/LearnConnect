@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetCourseListUseCase @Inject constructor(
+class GetCourseByIdUseCase @Inject constructor(
     private val repository: CourseRepository
 ) {
-    suspend operator fun invoke(): Flow<ResultData<List<Course>>> = flow {
-        emit(repository.getAllCourseList())
+    suspend operator fun invoke(courseId: String): Flow<ResultData<Course>> = flow {
+        emit(repository.getCourseDataById(courseId = courseId))
     }
 }

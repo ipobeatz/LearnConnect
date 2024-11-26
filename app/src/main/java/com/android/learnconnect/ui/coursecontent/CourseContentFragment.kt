@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,20 @@ class CourseContentFragment : Fragment() {
         if (videoList.isNotEmpty()) {
             playVideo(videoList.first().videoUrl)
         }
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isFullscreen) {
+                    toggleFullscreen()
+                } else {
+                    isEnabled = false
+                    requireActivity().onBackPressed()
+                }
+            }
+        }
+
+        // Callback'i bu fragment'in OnBackPressedDispatcher'ına ekleyin
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setupControls() {
@@ -145,6 +160,7 @@ class CourseContentFragment : Fragment() {
             // PlayerView boyutlarını güncelle
             val params = binding.playerView.layoutParams
             params.height = ViewGroup.LayoutParams.MATCH_PARENT
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT
             binding.playerView.layoutParams = params
 
             // RecyclerView'ı gizle

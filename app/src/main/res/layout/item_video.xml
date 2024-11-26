@@ -39,5 +39,5 @@
         android:layout_height="32dp"
         android:layout_gravity="center"
         android:src="@drawable/download"
-         />
+        />
 </LinearLayout>

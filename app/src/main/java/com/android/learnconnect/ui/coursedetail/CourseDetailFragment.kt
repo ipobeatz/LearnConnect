@@ -7,12 +7,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentCourseDetailBinding
+import com.android.learnconnect.domain.entity.Course
+import com.android.learnconnect.domain.entity.ResultData
 import com.bumptech.glide.RequestManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,7 +30,7 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
 
     private val viewModel: CourseDetailViewModel by viewModels()
     private val args: CourseDetailFragmentArgs by navArgs()
-
+    private var isRegistered = false
     @Inject
     lateinit var glide: RequestManager
 
@@ -41,34 +48,51 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
             findNavController().navigateUp()
         }
 
-        val courseName = args.courseName
-        val courseDescription = args.courseDescription
-        val courseImageUrl = args.courseImageUrl
-        val coursePrice = args.coursePrice
-        val isRegistered = args.isRegistered
+        val courseId = args.courseId
+        viewModel.getCourseDataFromId(courseId)
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.courseData.collectLatest {
+                    when (it) {
+                        is ResultData.Success -> {
+                            setupUI(it.data)
+                        }
+
+                        is ResultData.Error -> {
+
+                        }
+
+                        is ResultData.Loading -> {
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun setupUI(course: Course) {
+        isRegistered = course.isRegistered
         binding.apply {
-            detailCourseName.text = courseName
-            detailCourseDescription.text = courseDescription
-            detailCoursePrice.text = coursePrice
-            glide.load(courseImageUrl).placeholder(R.drawable.studio).into(detailCourseImage)
-
-            // ViewModel'deki kurs verisini güncelle
-            viewModel.setCourseDetails(courseName, isRegistered)
-
-            // Butonu gözlemle ve güncelle
-            viewModel.isRegistered.observe(viewLifecycleOwner) { registered ->
-                if (registered) {
-                    enrollButton.text = "Kursa Git"
-                    enrollButton.setOnClickListener {
-                        findNavController().navigate(R.id.action_courseDetailFragment_to_courseContentFragment)
-                    }
+            detailCourseName.text = course.name
+            detailCourseDescription.text = course.description
+            detailCoursePrice.text = course.coursePrice.toString()
+            glide.load(course.imageUrl).placeholder(R.drawable.studio).into(detailCourseImage)
+            if (isRegistered) {
+                enrollButton.text = "Kursa Git"
+            } else {
+                enrollButton.text = "Kursa Kaydolun"
+            }
+            enrollButton.setOnClickListener {
+                if (isRegistered) {
+                    findNavController().navigate(R.id.action_courseDetailFragment_to_courseContentFragment)
                 } else {
-                    enrollButton.text = "Kursa Kaydolun"
-                    enrollButton.setOnClickListener {
-                        viewModel.registerToCourse()
-                        Toast.makeText(requireContext(), "Kursa başarıyla kaydoldunuz!", Toast.LENGTH_SHORT).show()
-                    }
+                    viewModel.registerToCourse(courseId = course.id)
+                    isRegistered = true
+                    binding.enrollButton.text = "Kursa git"
+                    Toast.makeText(requireContext(), "Kursa başarıyla kaydoldunuz!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

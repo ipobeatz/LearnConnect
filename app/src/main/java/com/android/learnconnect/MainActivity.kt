@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.android.learnconnect.databinding.ActivityMainBinding
@@ -30,8 +31,11 @@ class MainActivity : AppCompatActivity() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             // Kullanıcı giriş yaptıysa ExploreFragment'ten başla
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.welcomeFragment, true) // loginFragment'a kadar olan tüm fragmentları dahil ederek stack'ten çıkar
+                .build()
             navController.setGraph(R.navigation.mobile_navigation, null) // Varsayılan grafiği yeniden başlat
-            navController.navigate(R.id.exploreFragment)
+            navController.navigate(R.id.exploreFragment, null, navOptions)
         }
 
         // BottomNavigation görünürlüğü ayarları
@@ -48,6 +52,14 @@ class MainActivity : AppCompatActivity() {
 
         // BottomNavigation ile NavController bağlantısı
         binding.navView.setupWithNavController(navController)
+    }
+
+    fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
     }
 
 }

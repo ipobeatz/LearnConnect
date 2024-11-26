@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.learnconnect.MainActivity
 import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.Course
@@ -41,6 +42,7 @@ class ExploreFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCourseListData()
+        viewModel.getCourseDataFromCategory("Yazılım")
         viewModel.getCategoryListData()
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -57,6 +59,27 @@ class ExploreFragment @Inject constructor() : Fragment() {
 
                         is ResultData.Loading -> {
 
+                        }
+                    }
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.filteredCourseListData.collectLatest {
+                    when (it) {
+                        is ResultData.Success -> {
+                            setupCourseUI2(it.data)
+                            (requireActivity() as MainActivity).hideLoading()
+                        }
+
+                        is ResultData.Error -> {
+                            (requireActivity() as MainActivity).hideLoading()
+                        }
+
+                        is ResultData.Loading -> {
+                            (requireActivity() as MainActivity).showLoading()
                         }
                     }
                 }
@@ -91,15 +114,24 @@ class ExploreFragment @Inject constructor() : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         coursesRecyclerView.adapter = CoursesAdapter(courses) { course ->
             val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
-                courseName = course.name,
-                courseDescription = course.description,
-                courseImageUrl = course.imageUrl,
-                coursePrice = "$${course.coursePrice}",
-                isRegistered = course.isRegistered // Buraya ekleyin
+                courseId = course.id
             )
             findNavController().navigate(action)
         }
     }
+
+    private fun setupCourseUI2(courses: List<Course>) {
+        val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView2)
+        coursesRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        coursesRecyclerView.adapter = CoursesAdapter(courses) { course ->
+            val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
+                courseId = course.id
+            )
+            findNavController().navigate(action)
+        }
+    }
+
     private fun setupCategoryUI(categories: List<Category>) {
         val categoriesRecyclerView = requireView().findViewById<RecyclerView>(R.id.categoriesRecyclerView)
         categoriesRecyclerView.layoutManager =

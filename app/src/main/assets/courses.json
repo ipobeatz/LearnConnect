@@ -1,343 +1,38 @@
 [
   {
     "id": "1",
-    "name": "Introduction to Design",
-    "description": "Learn the basics of design and improve your skills.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 2.5,
-    "coursePrice": 49.99,
-    "category": "Tasarım ve Yaratıcılık"
+    "title": "ChatGpt Log in",
+    "duration": "00:47",
+    "videoUrl": "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
   },
   {
     "id": "2",
-    "name": "Advanced Java Programming",
-    "description": "Master Java programming concepts and techniques.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.0,
-    "coursePrice": 39.99,
-    "category": "Yazılım Geliştirme"
+    "title": "Çalışma Kitabı ve Çalışma Sayfası Ekle",
+    "duration": "10:04",
+    "videoUrl": "https://example.com/video2.mp4"
   },
   {
     "id": "3",
-    "name": "Data Science Essentials",
-    "description": "An essential guide to the field of data science.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.8,
-    "coursePrice": 59.99,
-    "category": "BT ve Yazılım"
+    "title": "Çalışma Sayfalarını Yönetelim",
+    "duration": "04:58",
+    "videoUrl": "https://example.com/video3.mp4"
   },
   {
     "id": "4",
-    "name": "Marketing Mastery",
-    "description": "Learn advanced marketing strategies.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.2,
-    "coursePrice": 44.99,
-    "category": "Pazarlama"
+    "title": "Hücreleri Yönetelim",
+    "duration": "04:25",
+    "videoUrl": "https://example.com/video4.mp4"
   },
   {
     "id": "5",
-    "name": "Photography 101",
-    "description": "Capture stunning photos with this beginner's guide.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.3,
-    "coursePrice": 29.99,
-    "category": "Tasarım ve Yaratıcılık"
+    "title": "Yapı Oluşturalım",
+    "duration": "07:09",
+    "videoUrl": "https://example.com/video5.mp4"
   },
   {
     "id": "6",
-    "name": "UI/UX Design Fundamentals",
-    "description": "Understand the principles of effective UI/UX design.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.7,
-    "coursePrice": 54.99,
-    "category": "Tasarım ve Yaratıcılık"
-  },
-  {
-    "id": "7",
-    "name": "Web Development Bootcamp",
-    "description": "Build websites with HTML, CSS, and JavaScript.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.9,
-    "coursePrice": 79.99,
-    "category": "Yazılım Geliştirme"
-  },
-  {
-    "id": "8",
-    "name": "Artificial Intelligence Basics",
-    "description": "Explore the fundamentals of AI and machine learning.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.6,
-    "coursePrice": 64.99,
-    "category": "BT ve Yazılım"
-  },
-  {
-    "id": "9",
-    "name": "Mobile App Development with Kotlin",
-    "description": "Create mobile apps using Kotlin for Android.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.4,
-    "coursePrice": 59.99,
-    "category": "Yazılım Geliştirme"
-  },
-  {
-    "id": "10",
-    "name": "Cybersecurity Essentials",
-    "description": "Understand the basics of cybersecurity and how to protect systems.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.1,
-    "coursePrice": 34.99,
-    "category": "BT ve Yazılım"
-  },
-  {
-    "id": "11",
-    "name": "Time Management Strategies",
-    "description": "Improve productivity with time management techniques.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.5,
-    "coursePrice": 24.99,
-    "category": "Kişisel Gelişim"
-  },
-  {
-    "id": "12",
-    "name": "Leadership in the Workplace",
-    "description": "Learn how to lead and manage teams effectively.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.3,
-    "coursePrice": 49.99,
-    "category": "Kişisel Gelişim"
-  },
-  {
-    "id": "13",
-    "name": "Strategic Financial Planning",
-    "description": "Master financial planning techniques.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.7,
-    "coursePrice": 74.99,
-    "category": "Finans ve Muhasebe"
-  },
-  {
-    "id": "14",
-    "name": "Corporate Accounting Basics",
-    "description": "Understand accounting practices for businesses.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 3.9,
-    "coursePrice": 29.99,
-    "category": "Finans ve Muhasebe"
-  },
-  {
-    "id": "15",
-    "name": "Excel for Productivity",
-    "description": "Boost productivity with Excel tips and tricks.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.4,
-    "coursePrice": 19.99,
-    "category": "Ofiste Verimlilik"
-  },
-  {
-    "id": "16",
-    "name": "Effective Email Communication",
-    "description": "Learn how to write effective emails.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.1,
-    "coursePrice": 14.99,
-    "category": "Ofiste Verimlilik"
-  },
-  {
-    "id": "17",
-    "name": "E-commerce Store Basics",
-    "description": "Start and manage an online store successfully.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.8,
-    "coursePrice": 89.99,
-    "category": "E-ticaret Stratejileri"
-  },
-  {
-    "id": "18",
-    "name": "Advanced Photoshop Techniques",
-    "description": "Create amazing designs with Photoshop.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.7,
-    "coursePrice": 64.99,
-    "category": "Tasarım ve Yaratıcılık"
-  },
-  {
-    "id": "19",
-    "name": "Introduction to Python",
-    "description": "Learn the basics of Python programming.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.9,
-    "coursePrice": 49.99,
-    "category": "BT ve Yazılım"
-  },
-  {
-    "id": "20",
-    "name": "Public Speaking Skills",
-    "description": "Enhance your public speaking confidence and skills.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.2,
-    "coursePrice": 29.99,
-    "category": "Kişisel Gelişim"
-  },
-  {
-    "id": "21",
-    "name": "Digital Marketing Fundamentals",
-    "description": "Understand the basics of digital marketing.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.8,
-    "coursePrice": 79.99,
-    "category": "Pazarlama"
-  },
-  {
-    "id": "22",
-    "name": "Search Engine Optimization (SEO)",
-    "description": "Improve website ranking with SEO techniques.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.6,
-    "coursePrice": 39.99,
-    "category": "Pazarlama"
-  },
-  {
-    "id": "23",
-    "name": "Blockchain Basics",
-    "description": "Learn the fundamentals of blockchain technology.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.5,
-    "coursePrice": 69.99,
-    "category": "BT ve Yazılım"
-  },
-  {
-    "id": "24",
-    "name": "Introduction to Cryptocurrencies",
-    "description": "Understand how cryptocurrencies work.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.3,
-    "coursePrice": 34.99,
-    "category": "BT ve Yazılım"
-  },
-  {
-    "id": "25",
-    "name": "Graphic Design for Beginners",
-    "description": "Learn how to create stunning graphics.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.4,
-    "coursePrice": 29.99,
-    "category": "Tasarım ve Yaratıcılık"
-  },
-  {
-    "id": "26",
-    "name": "Social Media Marketing",
-    "description": "Grow your brand with social media strategies.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.9,
-    "coursePrice": 49.99,
-    "category": "Pazarlama"
-  },
-  {
-    "id": "27",
-    "name": "Introduction to SQL",
-    "description": "Master database management with SQL.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.2,
-    "coursePrice": 19.99,
-    "category": "BT ve Yazılım"
-  },
-  {
-    "id": "28",
-    "name": "Personal Finance Management",
-    "description": "Control your finances with this guide.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.8,
-    "coursePrice": 29.99,
-    "category": "Finans ve Muhasebe"
-  },
-  {
-    "id": "29",
-    "name": "Career Development Essentials",
-    "description": "Plan and achieve your career goals.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.4,
-    "coursePrice": 39.99,
-    "category": "Kişisel Gelişim"
-  },
-  {
-    "id": "30",
-    "name": "Stress Management Techniques",
-    "description": "Learn techniques to manage and reduce stress.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": false,
-    "videos": [],
-    "rating": 4.6,
-    "coursePrice": 19.99,
-    "category": "Kişisel Gelişim"
-  },
-  {
-    "id": "31",
-    "name": "Effective Business Communication",
-    "description": "Enhance your communication skills for the workplace.",
-    "imageUrl": "https://via.placeholder.com/150",
-    "isRegistered": true,
-    "videos": [],
-    "rating": 4.7,
-    "coursePrice": 29.99,
-    "category": "İş"
+    "title": "Gerçek Hayata Dair Problemlerimizi Çözelim",
+    "duration": "06:48",
+    "videoUrl": "https://example.com/video6.mp4"
   }
 ]

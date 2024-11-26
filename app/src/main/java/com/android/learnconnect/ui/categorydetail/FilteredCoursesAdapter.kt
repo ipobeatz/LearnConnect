@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.Course
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 
 class FilteredCoursesAdapter(
@@ -20,8 +19,8 @@ class FilteredCoursesAdapter(
 
     inner class FilteredCourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val courseImage: ImageView = itemView.findViewById(R.id.courseImage)
-        private val courseName: TextView = itemView.findViewById(R.id.courseName)
-        private val courseDescription: TextView = itemView.findViewById(R.id.courseDescription)
+        private val courseName: TextView = itemView.findViewById(R.id.coursesName)
+        private val courseDescription: TextView = itemView.findViewById(R.id.coursesDescription)
         private val coursePrice: TextView = itemView.findViewById(R.id.coursePrice)
 
         fun bind(course: Course) {

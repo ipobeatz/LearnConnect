@@ -17,6 +17,14 @@
 
         <!-- Durdur/Oynat Butonu -->
         <ImageButton
+            android:id="@+id/exo_previous"
+            style="@style/ExoMediaButton.Next"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:src="@drawable/media3_notification_seek_to_previous" />
+
+        <ImageButton
             android:id="@+id/exo_play_pause"
             android:layout_width="64dp"
             android:layout_height="64dp"

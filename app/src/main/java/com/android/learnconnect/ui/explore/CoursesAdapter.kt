@@ -17,21 +17,37 @@ class CoursesAdapter(
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val courseImage: ImageView = itemView.findViewById(R.id.courseImage)
-        private val courseName: TextView = itemView.findViewById(R.id.courseName)
-        private val courseDescription: TextView = itemView.findViewById(R.id.courseDescription)
+        private val courseName: TextView = itemView.findViewById(R.id.coursesName)
+        private val courseDescription: TextView = itemView.findViewById(R.id.coursesDescription)
         private val courseRating: TextView = itemView.findViewById(R.id.courseRating)
         private val coursePrice: TextView = itemView.findViewById(R.id.coursePrice)
+        private val favoriteButton: ImageView = itemView.findViewById(R.id.favoriteButton)
 
         fun bind(course: Course) {
             courseName.text = course.name
             courseDescription.text = course.description
             courseRating.text = course.rating.toString()
-            coursePrice.text = course.coursePrice.toString()
+            coursePrice.text = "$${course.coursePrice}"
+
+            // Glide ile görseli yükle
+            Glide.with(itemView.context)
+                .load(course.imageUrl)
+                .placeholder(R.drawable.studio)
+                .into(courseImage)
+
+            // Favoriler butonuna tıklama işlemi
+            favoriteButton.setOnClickListener {
+                course.isRegistered = !course.isRegistered
+                favoriteButton.setImageResource(
+                    if (course.isRegistered) R.drawable.favorite_icon else R.drawable.fullstar
+                )
+            }
+
 
             // Glide ile resmi yükle
             Glide.with(itemView.context)
                 .load(course.imageUrl)
-                .placeholder(R.drawable.studio) // Yer tutucu resim
+                .placeholder(R.drawable.studio)
                 .into(courseImage)
 
             val star1: ImageView = itemView.findViewById(R.id.star1)

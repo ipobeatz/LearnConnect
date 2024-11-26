@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             app:use_controller="true"
             android:keepScreenOn="true"
-            app:resize_mode="fit" />
+            app:resize_mode="fill" />
 
         <!-- Video List -->
         <androidx.recyclerview.widget.RecyclerView

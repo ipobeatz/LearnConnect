@@ -7,6 +7,7 @@ import com.android.learnconnect.domain.usecase.GetCourseListUseCase
 import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
+import com.android.learnconnect.domain.usecase.FilterCourseByCategoryNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,13 +18,19 @@ import javax.inject.Inject
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
     private val getCourseListUseCase: GetCourseListUseCase,
-    private val getCategoryListUseCase: GetCategoryListUseCase
+    private val getCategoryListUseCase: GetCategoryListUseCase,
+    private val filterCourseByCategoryNameUseCase: FilterCourseByCategoryNameUseCase
 ) : ViewModel() {
 
     private val _courseListData: MutableStateFlow<ResultData<List<Course>>> =
         MutableStateFlow(ResultData.Loading())
     @VisibleForTesting
     internal val courseList: StateFlow<ResultData<List<Course>>> = _courseListData
+
+    private val _filteredCourseListData: MutableStateFlow<ResultData<List<Course>>> =
+        MutableStateFlow(ResultData.Loading())
+    @VisibleForTesting
+    internal val filteredCourseListData: StateFlow<ResultData<List<Course>>> = _filteredCourseListData
 
     private val _categoryListData: MutableStateFlow<ResultData<List<Category>>> =
         MutableStateFlow(ResultData.Loading())
@@ -44,6 +51,15 @@ class ExploreViewModel @Inject constructor(
         viewModelScope.launch {
             getCategoryListUseCase().collect {
                 _categoryListData.value = it
+            }
+        }
+    }
+
+    fun getCourseDataFromCategory(category: String) {
+        _filteredCourseListData.value = ResultData.Loading()
+        viewModelScope.launch {
+            filterCourseByCategoryNameUseCase(category).collect {
+                _filteredCourseListData.value = it
             }
         }
     }

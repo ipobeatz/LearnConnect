@@ -11,9 +11,9 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
 
-    <action
-        android:id="@+id/action_loginFragment_to_exploreFragment"
-        app:destination="@id/exploreFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment" />
 
     </fragment>
 
@@ -58,9 +58,9 @@
         android:label="Profile"
         tools:layout="@layout/fragment_profile" >
 
-    <action
-        android:id="@+id/action_profileFragment_to_welcomeFragment"
-        app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
 
     <fragment
@@ -70,20 +70,8 @@
 
         <!-- Argument Tanımları -->
         <argument
-            android:name="courseName"
+            android:name="courseId"
             app:argType="string" />
-        <argument
-            android:name="courseDescription"
-            app:argType="string" />
-        <argument
-            android:name="courseImageUrl"
-            app:argType="string" />
-        <argument
-            android:name="coursePrice"
-            app:argType="string" />
-        <argument
-            android:name="isRegistered"
-            app:argType="boolean" />
 
         <!-- CourseContentFragment'e geçiş -->
         <action
