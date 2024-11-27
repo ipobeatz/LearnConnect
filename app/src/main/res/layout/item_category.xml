@@ -15,5 +15,5 @@
     android:paddingBottom="2dp"
     android:singleLine="false"
     android:text="Category Example"
-    android:textColor="@android:color/black"
+    android:textColor="?attr/colorOnBackground"
     android:textSize="14sp" />

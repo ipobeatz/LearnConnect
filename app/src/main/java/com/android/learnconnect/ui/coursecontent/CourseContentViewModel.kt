@@ -1,4 +1,4 @@
-package com.android.learnconnect.ui.coursedetail
+package com.android.learnconnect.ui.coursecontent
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,50 +19,17 @@ import org.jetbrains.annotations.VisibleForTesting
 import javax.inject.Inject
 
 @HiltViewModel
-class CourseDetailViewModel @Inject constructor(
-    private val setFavoriteCourseUseCase: SetFavoriteCourseUseCase,
-    private val getCourseByIdUseCase: GetCourseByIdUseCase,
-    private val registerCourseUseCase: RegisterCourseUseCase,
+class CourseContentViewModel @Inject constructor(
     private val updateLastSecondOfVideoUseCase: UpdateLastSecondOfVideoUseCase,
+    private val getCourseByIdUseCase: GetCourseByIdUseCase
 ) : ViewModel() {
-
-    private val _isRegisteredSuccessfully = MutableLiveData<ResultData<*>>()
-    val isRegisteredSuccessfully: LiveData<ResultData<*>> get() = _isRegisteredSuccessfully
-
-    private val _filteredCourseListData: MutableStateFlow<ResultData<List<Course>>> =
-        MutableStateFlow(ResultData.Loading())
-
-    @VisibleForTesting
-    internal val filteredCourseListData: StateFlow<ResultData<List<Course>>> =
-        _filteredCourseListData
-
 
     private val _courseData: MutableStateFlow<ResultData<Course>> =
         MutableStateFlow(ResultData.Loading())
 
     @VisibleForTesting
-    internal val courseData: StateFlow<ResultData<Course>> = _courseData
-
-    fun registerToCourse(courseId: String) {
-        viewModelScope.launch {
-            registerCourseUseCase.invoke(courseId = courseId)
-        }
-    }
-
-    fun getCourseDataFromId(courseId: String) {
-        viewModelScope.launch {
-            getCourseByIdUseCase.invoke(courseId = courseId).collectLatest {
-                _courseData.value = it
-            }
-        }
-    }
-
-    fun setCourseFavorite(courseId: String, isFavorite: Boolean) {
-        _filteredCourseListData.value = ResultData.Loading()
-        viewModelScope.launch {
-            setFavoriteCourseUseCase(courseId, isFavorite)
-        }
-    }
+    internal val courseData: StateFlow<ResultData<Course>> =
+        _courseData
 
     fun updateLastSecond(courseId: String, videoId: String, lastSecond: Int) {
         viewModelScope.launch {

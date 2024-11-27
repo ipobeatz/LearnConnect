@@ -1,4 +1,4 @@
-package com.android.learnconnect.auth
+package com.android.learnconnect.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,6 +32,9 @@ class LoginFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp() // Bir önceki ekrana dön
+        }
         // FirebaseAuth başlatılıyor
         auth = FirebaseAuth.getInstance()
 

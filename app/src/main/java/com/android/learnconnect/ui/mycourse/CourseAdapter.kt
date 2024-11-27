@@ -12,7 +12,9 @@ import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.Course
 import org.w3c.dom.Text
 
-class CourseAdapter : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DiffCallback()) {
+class CourseAdapter(
+    private val onCourseClick: (Course) -> Unit // Tıklama işlevini parametre olarak alıyoruz
+) : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.filtered_item_course, parent, false)
@@ -22,6 +24,9 @@ class CourseAdapter : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DiffCa
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         val course = getItem(position)
         holder.bind(course)
+        holder.itemView.setOnClickListener {
+            onCourseClick(course) // Tıklanan kursu geri döndürüyoruz
+        }
     }
 
     class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,6 +53,7 @@ class CourseAdapter : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DiffCa
             )
             setStarRating(course.rating, stars)
         }
+
         private fun setStarRating(rating: Float, stars: List<ImageView>) {
             for (i in stars.indices) {
                 if (i < rating.toInt()) {

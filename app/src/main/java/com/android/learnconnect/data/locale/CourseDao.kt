@@ -3,7 +3,10 @@ package com.android.learnconnect.data.locale
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
 import com.android.learnconnect.domain.entity.Course
+import com.android.learnconnect.domain.entity.VideoItem
 
 @Dao
 interface CourseDao {
@@ -33,4 +36,14 @@ interface CourseDao {
 
     @Query("SELECT * FROM courses WHERE LOWER(name) LIKE '%' || LOWER(:keyword) || '%'")
     suspend fun searchCoursesByKeyword(keyword: String): List<Course>
+
+    @Update
+    suspend fun updateCourse(course: Course)
+
+    @Transaction
+    suspend fun updateLastSecond(courseId: String, videoId: String, lastSecond: Int) {
+        val course = getCourseById(courseId)
+        course.videoItem.find { it.id == videoId }?.lastSecond = lastSecond
+        updateCourse(course)
+    }
 }

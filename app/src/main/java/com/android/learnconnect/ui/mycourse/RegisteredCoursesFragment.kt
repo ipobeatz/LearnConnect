@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.learnconnect.databinding.FragmentRegisteredCoursesBinding
 import com.android.learnconnect.domain.entity.Course
@@ -20,11 +21,17 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisteredCoursesFragment : Fragment() {
-
     private var _binding: FragmentRegisteredCoursesBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: MyCourseViewModel by viewModels()
+    private var navigationListener: CourseNavigationListener? = null
+
+    override fun onAttach(context: android.content.Context) {
+        super.onAttach(context)
+        if (parentFragment is CourseNavigationListener) {
+            navigationListener = parentFragment as CourseNavigationListener
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -36,7 +43,9 @@ class RegisteredCoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CourseAdapter() // RecyclerView Adapter
+        val adapter = CourseAdapter { course ->
+            navigateToCourseDetail(course.id) // Kurs detayına yönlendir
+        }
         binding.recyclerid.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerid.adapter = adapter
 
@@ -48,13 +57,11 @@ class RegisteredCoursesFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.registeredCourses.collectLatest { result ->
                     when (result) {
-                        is ResultData.Loading -> {
-
+                        is ResultData.Loading -> { /* Loading state */
                         }
 
                         is ResultData.Success -> {
-
-                            adapter.submitList(result.data) // Update RecyclerView
+                            adapter.submitList(result.data)
                         }
 
                         is ResultData.Error -> {
@@ -70,8 +77,7 @@ class RegisteredCoursesFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun navigateToCourseDetail(courseId: String) {
+        navigationListener?.onNavigateToCourseDetail(courseId)
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.android.learnconnect.R
 import com.android.learnconnect.ui.profile.ProfileViewModel
@@ -17,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyCourseFragment : Fragment() {
+class MyCourseFragment : Fragment(), CourseNavigationListener {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
@@ -57,5 +58,11 @@ class MyCourseFragment : Fragment() {
 
             tab.customView = customView
         }.attach()
+    }
+
+    override fun onNavigateToCourseDetail(courseId: String) {
+        val action = MyCourseFragmentDirections
+            .actionMyCourseFragmentToCourseDetailFragment(courseId)
+        findNavController().navigate(action)
     }
 }

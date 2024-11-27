@@ -1,7 +1,6 @@
 package com.android.learnconnect.domain.usecase
 
-import com.android.learnconnect.data.CategoryRepository
-import com.android.learnconnect.data.CourseRepository
+import com.android.learnconnect.data.category.CategoryRepository
 import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.ResultData
 import kotlinx.coroutines.flow.Flow

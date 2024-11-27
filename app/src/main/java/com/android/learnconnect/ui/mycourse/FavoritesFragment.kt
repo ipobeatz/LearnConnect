@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentFavoritesBinding
@@ -25,6 +26,15 @@ class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
+    private var navigationListener: CourseNavigationListener? = null
+
+    override fun onAttach(context: android.content.Context) {
+        super.onAttach(context)
+        if (parentFragment is CourseNavigationListener) {
+            navigationListener = parentFragment as CourseNavigationListener
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -36,7 +46,9 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CourseAdapter() // RecyclerView Adapter
+        val adapter = CourseAdapter { course ->
+            navigateToCourseDetail(course.id) // Tıklanan kursun detayına yönlendir
+        }
         binding.favoriteCoursesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.favoriteCoursesRecyclerView.adapter = adapter
 
@@ -67,6 +79,13 @@ class FavoritesFragment : Fragment() {
             }
         }
     }
+    private fun navigateToCourseDetail(courseId: String) {
+        navigationListener?.onNavigateToCourseDetail(courseId)
+    }
+
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

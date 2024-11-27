@@ -19,19 +19,27 @@ import com.android.learnconnect.MainActivity
 import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.Course
+import com.android.learnconnect.domain.entity.DashboardItem
 import com.android.learnconnect.domain.entity.ResultData
 import com.android.learnconnect.domain.mockdata.LearnConnectConstants.FILTERED_COURSE_DATA_LIST
-import com.google.gson.Gson
+import com.bumptech.glide.RequestManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ExploreFragment @Inject constructor() : Fragment() {
+class ExploreFragment @Inject constructor() : Fragment(), OnDashboardItemClickListener {
 
     private val viewModel: ExploreViewModel by viewModels()
     private var courseListData: List<Course> = listOf()
+    private val courseIdHashMapFavorite: HashMap<String, Boolean> = hashMapOf()
+    private var courseAdapter: MainAdapter? = null
+    private val exploreItemList: ArrayList<DashboardItem> = arrayListOf()
+
+    @Inject
+    lateinit var glide: RequestManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,6 +51,7 @@ class ExploreFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCourseListData()
         viewModel.getCourseDataFromCategory("Yazılım")
+        viewModel.getCourseSecondDataFromCategory("Kişisel Gelişim")
         viewModel.getCategoryListData()
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -50,7 +59,15 @@ class ExploreFragment @Inject constructor() : Fragment() {
                 viewModel.courseList.collectLatest {
                     when (it) {
                         is ResultData.Success -> {
-                            setupCourseUI(it.data)
+                            it.data.forEach { course ->
+                                exploreItemList.add(DashboardItem.CourseRow(course))
+                            }
+
+                            courseListData = it.data
+                            it.data.forEach {
+                                courseIdHashMapFavorite.set(it.id, it.isFavorite)
+                            }
+                            setupCourseUI()
                         }
 
                         is ResultData.Error -> {
@@ -70,7 +87,7 @@ class ExploreFragment @Inject constructor() : Fragment() {
                 viewModel.filteredCourseListData.collectLatest {
                     when (it) {
                         is ResultData.Success -> {
-                            setupCourseUI2(it.data)
+                            exploreItemList.add(DashboardItem.HorizontalList(it.data))
                             (requireActivity() as MainActivity).hideLoading()
                         }
 
@@ -80,6 +97,41 @@ class ExploreFragment @Inject constructor() : Fragment() {
 
                         is ResultData.Loading -> {
                             //(requireActivity() as MainActivity).showLoading()
+                        }
+                    }
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                combine(
+                    viewModel.courseList,
+                    viewModel.filteredCourseListData,
+                    viewModel.filteredSecondCourseListData
+                ) { courseList, filteredList, filteredSecondData ->
+                    // Her iki Flow'dan gelen veriyi birleştir
+                    Triple(courseList, filteredList, filteredSecondData)
+                }.collectLatest { (courseList, filteredList, filteredSecondData) ->
+                    when {
+                        courseList is ResultData.Success && filteredList is ResultData.Success && filteredSecondData is ResultData.Success -> {
+                            exploreItemList.clear()
+                            exploreItemList.add(DashboardItem.HorizontalList(filteredList.data))
+                            exploreItemList.add(DashboardItem.HorizontalList(filteredSecondData.data))
+                            courseList.data.forEach {
+                                exploreItemList.add(DashboardItem.CourseRow(it))
+                                courseIdHashMapFavorite[it.id] = it.isFavorite
+                            }
+                            (requireActivity() as MainActivity).hideLoading()
+                            setupCourseUI()
+                        }
+
+                        courseList is ResultData.Loading || filteredList is ResultData.Loading -> {
+                            (requireActivity() as MainActivity).showLoading()
+                        }
+
+                        courseList is ResultData.Error || filteredList is ResultData.Error -> {
+                            (requireActivity() as MainActivity).hideLoading()
                         }
                     }
                 }
@@ -106,51 +158,37 @@ class ExploreFragment @Inject constructor() : Fragment() {
             }
         }
     }
-    private fun setupCourseUI(courses: List<Course>) {
-        val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView)
-        coursesRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        coursesRecyclerView.adapter = CoursesAdapter(
-            courses,
-            onItemClick = { course ->
-                val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
-                    courseId = course.id
-                )
-                findNavController().navigate(action)
-            },
-            onFavoriteClick = { course ->
-                // Favori durumu doğru yansıtılıyor
-                if (course.isFavorite) {
-                    viewModel.setCourseFavorite(course.id, true)
-                    Toast.makeText(requireContext(), "${course.name} favorilere eklendi.", Toast.LENGTH_SHORT).show()
-                } else {
-                    viewModel.setCourseFavorite(course.id, false)
-                    Toast.makeText(requireContext(), "${course.name} favorilerden kaldırıldı.", Toast.LENGTH_SHORT).show()
-                }
-            }
+    private fun setupCourseUI() {
+        val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.exploreRecyclerView)
+        coursesRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        courseAdapter = MainAdapter(
+            exploreItemList, glide = glide, listener = this
         )
+        courseAdapter?.setHashmap(courseIdHashMapFavorite)
+        coursesRecyclerView.adapter = courseAdapter
     }
 
-    private fun setupCourseUI2(courses: List<Course>) {
+    /*private fun setupCourseUI2(courses: List<Course>) {
         if (courses.isNotEmpty()) {
             val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView2)
             coursesRecyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-            coursesRecyclerView.adapter = CoursesAdapter(
+            courseAdapter = CoursesAdapter(
                 courses,
                 onItemClick = { course ->
-                    // Kurs detayına git
                     val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
                         courseId = course.id
                     )
                     findNavController().navigate(action)
                 },
                 onFavoriteClick = { course ->
-                    // Favori durumu değiştirildiğinde çağrılır
-                    viewModel.setCourseFavorite(course.id, course.isFavorite)
-                    val message = if (course.isFavorite) {
+                    val newStatus = courseIdHashMapFavorite.get(course.id)
+                    viewModel.setCourseFavorite(course.id, newStatus ?: false)
+                    val message = if (newStatus == true) {
                         "${course.name} favorilere eklendi."
                     } else {
                         "${course.name} favorilerden kaldırıldı."
@@ -158,14 +196,19 @@ class ExploreFragment @Inject constructor() : Fragment() {
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             )
+            courseAdapter?.setHashmap(courseIdHashMapFavorite)
+            coursesRecyclerView.adapter = courseAdapter
         } else {
             // Eğer liste boşsa yapılacaklar
             Toast.makeText(requireContext(), "Kurs listesi boş", Toast.LENGTH_SHORT).show()
         }
     }
 
+     */
+
     private fun setupCategoryUI(categories: List<Category>) {
-        val categoriesRecyclerView = requireView().findViewById<RecyclerView>(R.id.categoriesRecyclerView)
+        val categoriesRecyclerView =
+            requireView().findViewById<RecyclerView>(R.id.categoriesRecyclerView)
         categoriesRecyclerView.layoutManager =
             GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
         categoriesRecyclerView.adapter = CategoriesAdapter(categories) { category ->
@@ -186,7 +229,16 @@ class ExploreFragment @Inject constructor() : Fragment() {
                 putString("categoryTitle", category.title)
                 putSerializable(FILTERED_COURSE_DATA_LIST, filteredCourses as ArrayList<Course>)
             }
-            findNavController().navigate(R.id.action_exploreFragment_to_filteredCoursesFragment, bundle)
+            findNavController().navigate(
+                R.id.action_exploreFragment_to_filteredCoursesFragment, bundle
+            )
         }
+    }
+
+    override fun onItemClicked(course: Course) {
+        val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
+            courseId = course.id
+        )
+        findNavController().navigate(action)
     }
 }

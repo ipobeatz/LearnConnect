@@ -1,6 +1,6 @@
 package com.android.learnconnect.domain.usecase
 
-import com.android.learnconnect.data.CourseRepository
+import com.android.learnconnect.data.course.CourseRepository
 import javax.inject.Inject
 
 class SetFavoriteCourseUseCase @Inject constructor(

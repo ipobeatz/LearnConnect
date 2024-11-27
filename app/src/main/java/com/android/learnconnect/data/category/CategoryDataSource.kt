@@ -1,4 +1,4 @@
-package com.android.learnconnect.data
+package com.android.learnconnect.data.category
 
 import com.android.learnconnect.domain.entity.Category
 import com.android.learnconnect.domain.entity.ResultData

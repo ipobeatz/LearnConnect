@@ -1,4 +1,4 @@
-package com.android.learnconnect.data
+package com.android.learnconnect.data.course
 
 import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
@@ -19,5 +19,7 @@ interface CourseRepository {
     suspend fun setFavoriteCourse(courseId: String, isFavorite: Boolean): ResultData<*>
 
     suspend fun getFavoriteCourseList(): ResultData<List<Course>>
+
+    suspend fun setLastSecondOfVide(courseId: String, videoId: String, lastSecond: Int) : ResultData<*>
 
 }

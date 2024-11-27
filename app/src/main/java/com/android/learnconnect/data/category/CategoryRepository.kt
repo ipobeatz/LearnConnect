@@ -1,7 +1,6 @@
-package com.android.learnconnect.data
+package com.android.learnconnect.data.category
 
 import com.android.learnconnect.domain.entity.Category
-import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
 import kotlinx.coroutines.flow.Flow
 

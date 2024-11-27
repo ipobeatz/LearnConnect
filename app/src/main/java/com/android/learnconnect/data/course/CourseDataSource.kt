@@ -1,10 +1,8 @@
-package com.android.learnconnect.data
+package com.android.learnconnect.data.course
 
 import com.android.learnconnect.data.locale.CourseDao
 import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
-import com.android.learnconnect.domain.mockdata.fake.FakeAssetManager
-import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 class CourseDataSource @Inject constructor(
@@ -49,5 +47,13 @@ class CourseDataSource @Inject constructor(
 
     override suspend fun getFavoriteCourseList(): ResultData<List<Course>> {
         return ResultData.Success(courseDao.getFavoriteCourseList())
+    }
+
+    override suspend fun setLastSecondOfVide(courseId: String, videoId: String, lastSecond: Int) : ResultData<*> {
+        return try {
+            ResultData.Success(courseDao.updateLastSecond(courseId, videoId, lastSecond))
+        } catch (e: Exception) {
+            ResultData.Error(e)
+        }
     }
 }

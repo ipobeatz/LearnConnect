@@ -31,6 +31,8 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
     private val viewModel: CourseDetailViewModel by viewModels()
     private val args: CourseDetailFragmentArgs by navArgs()
     private var isRegistered = false
+    private var isFavorite = false
+
     @Inject
     lateinit var glide: RequestManager
 
@@ -75,6 +77,9 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
 
     private fun setupUI(course: Course) {
         isRegistered = course.isRegistered
+        isFavorite = course.isFavorite
+
+        Toast.makeText(requireContext(), "Son saniye: " + course.videoItem.first().lastSecond, Toast.LENGTH_SHORT).show()
         binding.apply {
             detailCourseName.text = course.name
             detailCourseDescription.text = course.description
@@ -87,15 +92,40 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
             }
             enrollButton.setOnClickListener {
                 if (isRegistered) {
-                    findNavController().navigate(R.id.action_courseDetailFragment_to_courseContentFragment)
+                    val action =
+                        CourseDetailFragmentDirections.actionCourseDetailFragmentToCourseContentFragment(
+                            courseId = course.id
+                        )
+                    findNavController().navigate(action)
                 } else {
                     viewModel.registerToCourse(courseId = course.id)
                     isRegistered = true
                     binding.enrollButton.text = "Kursa git"
-                    Toast.makeText(requireContext(), "Kursa başarıyla kaydoldunuz!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(), "Kursa başarıyla kaydoldunuz!", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            setFavoriteIcon()
+
+            favoriteButton.setOnClickListener {
+                if (isFavorite) {
+                    viewModel.setCourseFavorite(course.id, false)
+                    isFavorite = false
+                    setFavoriteIcon()
+                } else {
+                    viewModel.setCourseFavorite(course.id, true)
+                    isFavorite = true
+                    setFavoriteIcon()
                 }
             }
         }
+    }
+
+    private fun setFavoriteIcon() {
+        binding.favoriteButton.setImageResource(
+            if (isFavorite) R.drawable.love_svgrepo_com else R.drawable.love_svgrepo_com_2
+        )
     }
 
     override fun onDestroyView() {

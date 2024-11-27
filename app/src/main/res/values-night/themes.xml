@@ -1,7 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.LearnConnect" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <!-- Dark application theme -->
+    <style name="Base.Theme.LearnConnect.Dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color (darker tone of red) -->
+        <item name="colorPrimary">#8B0000</item> <!-- Darker Red -->
+        <item name="colorPrimaryVariant">#600000</item> <!-- Even Darker Red -->
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnBackground">#FFFFFF</item>
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">#00504E</item> <!-- Dark Teal -->
+        <item name="colorSecondaryVariant">#00383A</item> <!-- Even Darker Teal -->
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Background and surface colors -->
+        <item name="colorSurface">#1E1E1E</item> <!-- Slightly lighter for surfaces -->
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- Error color -->
+        <item name="colorError">#CF6679</item> <!-- Light Red -->
+        <item name="colorOnError">@color/black</item>
     </style>
 </resources>

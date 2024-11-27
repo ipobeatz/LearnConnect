@@ -21,7 +21,6 @@ class ExploreViewModel @Inject constructor(
     private val getCourseListUseCase: GetCourseListUseCase,
     private val getCategoryListUseCase: GetCategoryListUseCase,
     private val filterCourseByCategoryNameUseCase: FilterCourseByCategoryNameUseCase,
-    private val setFavoriteCourseUseCase: SetFavoriteCourseUseCase
 ) : ViewModel() {
 
     private val _courseListData: MutableStateFlow<ResultData<List<Course>>> =
@@ -33,6 +32,11 @@ class ExploreViewModel @Inject constructor(
         MutableStateFlow(ResultData.Loading())
     @VisibleForTesting
     internal val filteredCourseListData: StateFlow<ResultData<List<Course>>> = _filteredCourseListData
+
+    private val _filteredSecondCourseListData: MutableStateFlow<ResultData<List<Course>>> =
+        MutableStateFlow(ResultData.Loading())
+    @VisibleForTesting
+    internal val filteredSecondCourseListData: StateFlow<ResultData<List<Course>>> = _filteredSecondCourseListData
 
     private val _categoryListData: MutableStateFlow<ResultData<List<Category>>> =
         MutableStateFlow(ResultData.Loading())
@@ -66,10 +70,12 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    fun setCourseFavorite(courseId: String, isFavorite: Boolean) {
-        _filteredCourseListData.value = ResultData.Loading()
+    fun getCourseSecondDataFromCategory(category: String) {
+        _filteredSecondCourseListData.value = ResultData.Loading()
         viewModelScope.launch {
-            setFavoriteCourseUseCase(courseId, isFavorite)
+            filterCourseByCategoryNameUseCase(category).collect {
+                _filteredSecondCourseListData.value = it
+            }
         }
     }
 }

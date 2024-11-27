@@ -13,20 +13,14 @@
         <!-- ExoPlayer View -->
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/playerView"
-            app:controller_layout_id="@layout/custom_exoplayer_controls"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:use_controller="true"
             android:keepScreenOn="true"
-            app:resize_mode="fill" />
+            app:controller_layout_id="@layout/custom_exoplayer_controls"
+            app:resize_mode="fill"
+            app:use_controller="true" />
 
         <!-- Video List -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/videoRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp" />
     </LinearLayout>
 </FrameLayout>

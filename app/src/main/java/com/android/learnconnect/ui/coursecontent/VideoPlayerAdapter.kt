@@ -40,7 +40,13 @@ class VideoPlayerAdapter(
 
         fun bind(video: VideoItem) {
             titleTextView.text = video.title
-            durationTextView.text = video.duration
+            durationTextView.text = formatSeconds(video.lastSecond) + "/" + video.duration
+        }
+
+        private fun formatSeconds(seconds: Int): String {
+            val minutes = seconds / 60
+            val remainingSeconds = seconds % 60
+            return String.format("%d:%02d", minutes, remainingSeconds)
         }
     }
 }

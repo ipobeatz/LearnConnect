@@ -10,11 +10,12 @@ import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.Course
 import com.bumptech.glide.Glide
 
-class CoursesAdapter(
+class HorizontalCourseAdapter(
     private val courses: List<Course>,
-    private val onItemClick: (Course) -> Unit,
-    private val onFavoriteClick: (Course) -> Unit
-) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
+    private val listener: OnDashboardItemClickListener
+) : RecyclerView.Adapter<HorizontalCourseAdapter.CourseViewHolder>() {
+
+    private var courseIdHashMapFavorite: HashMap<String, Boolean> = hashMapOf()
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val courseImage: ImageView = itemView.findViewById(R.id.courseImage)
@@ -36,18 +37,11 @@ class CoursesAdapter(
                 .placeholder(R.drawable.studio)
                 .into(courseImage)
 
+            println("mcmc --> " + course.name + " -- " + courseIdHashMapFavorite[course.id])
             // Favoriler butonuna tıklama işlemi
             favoriteButton.setImageResource(
-                if (course.isFavorite) R.drawable.love_svgrepo_com_2 else R.drawable.love_svgrepo_com
+                if (courseIdHashMapFavorite[course.id] == true) R.drawable.love_svgrepo_com else R.drawable.love_svgrepo_com_2
             )
-
-            // Favori butonuna tıklama işlemi
-            favoriteButton.setOnClickListener {
-                course.isFavorite = !course.isFavorite
-                notifyItemChanged(adapterPosition)
-                onFavoriteClick(course) // Callback ile ViewModel'e bildir
-            }
-
 
             // Glide ile resmi yükle
             Glide.with(itemView.context)
@@ -77,7 +71,7 @@ class CoursesAdapter(
 
             // Tıklama işlemi
             itemView.setOnClickListener {
-                onItemClick(course)
+                listener.onItemClicked(course)
             }
         }
     }
@@ -90,6 +84,11 @@ class CoursesAdapter(
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         holder.bind(courses[position])
+    }
+
+    fun setHashmap(courseIdHashMap: HashMap<String, Boolean>) {
+        courseIdHashMapFavorite.clear()
+        courseIdHashMapFavorite = courseIdHashMap
     }
 
     override fun getItemCount(): Int = courses.size

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/exploreFragment">
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.learnconnect.auth.LoginFragment"
+        android:name="com.android.learnconnect.ui.auth.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
 
         <action
             android:id="@+id/action_loginFragment_to_exploreFragment"
@@ -19,13 +19,14 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.android.learnconnect.auth.RegisterFragment"
+        android:name="com.android.learnconnect.ui.auth.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 
+
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.android.learnconnect.auth.WelcomeFragment"
+        android:name="com.android.learnconnect.ui.auth.WelcomeFragment"
         android:label="Welcome"
         tools:layout="@layout/fragment_welcome">
 
@@ -50,13 +51,18 @@
         android:id="@+id/myCourseFragment"
         android:name="com.android.learnconnect.ui.mycourse.MyCourseFragment"
         android:label="Explore"
-        tools:layout="@layout/fragment_my_course" />
+        tools:layout="@layout/fragment_my_course">
+
+        <action
+            android:id="@+id/action_myCourseFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.android.learnconnect.ui.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
 
         <action
             android:id="@+id/action_profileFragment_to_welcomeFragment"
@@ -68,7 +74,6 @@
         android:name="com.android.learnconnect.ui.coursedetail.CourseDetailFragment"
         tools:layout="@layout/fragment_course_detail">
 
-        <!-- Argument Tanımları -->
         <argument
             android:name="courseId"
             app:argType="string" />
@@ -83,7 +88,13 @@
     <fragment
         android:id="@+id/courseContentFragment"
         android:name="com.android.learnconnect.ui.coursecontent.CourseContentFragment"
-        tools:layout="@layout/fragment_course_content" />
+        tools:layout="@layout/fragment_course_content">
+
+        <argument
+            android:name="courseId"
+            app:argType="string" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/showAllCategoriesFragment"
@@ -113,17 +124,27 @@
             app:argType="string" />
 
         <argument
+            android:name="filteredCourseDataList"
             app:argType="java.io.Serializable"
-            app:nullable="true"
-            android:name="filteredCourseDataList" />
+            app:nullable="true" />
 
         <action
             android:id="@+id/action_filteredCoursesFragment_to_courseDetailFragment"
-            app:destination="@id/courseDetailFragment"/>
+            app:destination="@id/courseDetailFragment" />
     </fragment>
 
     <!-- ExploreFragment'ten FilteredCoursesFragment'e geçiş için action -->
     <action
         android:id="@+id/action_exploreFragment_to_filteredCoursesFragment"
         app:destination="@id/filteredCoursesFragment" />
+
+    <fragment
+        android:id="@+id/registeredCoursesFragment"
+        android:name="com.android.learnconnect.ui.mycourse.RegisteredCoursesFragment"
+        android:label="Kayıtlı Kurslar">
+
+        <action
+            android:id="@+id/action_registeredCoursesFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+    </fragment>
 </navigation>
