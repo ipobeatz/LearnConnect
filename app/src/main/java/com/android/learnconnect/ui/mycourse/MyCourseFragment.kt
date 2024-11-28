@@ -48,11 +48,11 @@ class MyCourseFragment : Fragment(), CourseNavigationListener {
             when (position) {
                 0 -> {
                     tabIcon.setImageResource(R.drawable.saved) // Icon for "Kayıtlı Derslerim"
-                    tabText.text = "Kayıtlı Derslerim"
+                    tabText.text = getString(R.string.my_saved_courses)
                 }
                 1 -> {
                     tabIcon.setImageResource(R.drawable.favorite_icon) // Icon for "Favorilerim"
-                    tabText.text = "Favorilerim"
+                    tabText.text = getString(R.string.my_favorites)
                 }
             }
 

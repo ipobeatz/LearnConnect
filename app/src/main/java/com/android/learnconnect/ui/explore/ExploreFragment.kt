@@ -237,7 +237,7 @@ class ExploreFragment @Inject constructor() : Fragment(), OnDashboardItemClickLi
 
     override fun onItemClicked(course: Course) {
         val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
-            courseId = course.id
+            videoId = course.id
         )
         findNavController().navigate(action)
     }

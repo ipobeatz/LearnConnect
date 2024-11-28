@@ -44,14 +44,11 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        compose = true
     }
     hilt {
         enableAggregatingTask = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
-    }
+
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
@@ -70,6 +67,7 @@ dependencies {
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.hilt)
     implementation(libs.bundles.otherLibraries)
+    testImplementation (libs.kotlin.test)
     implementation(libs.bundles.retrofit)
     implementation(libs.androidx.media3.session)
     implementation(libs.firebase.auth.ktx)

@@ -50,7 +50,7 @@ class FilteredCoursesFragment @Inject constructor() : Fragment() {
             FilteredCoursesAdapter(it, glide = glide) { course ->
                 val action = FilteredCoursesFragmentDirections
                     .actionFilteredCoursesFragmentToCourseDetailFragment(
-                        courseId = course.id
+                        videoId = course.id
                     )
                 findNavController().navigate(action)
             }

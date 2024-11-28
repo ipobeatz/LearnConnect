@@ -17,6 +17,7 @@ daggerHilt = "2.50"
 hiltCommon = "1.2.0"
 hiltNavigationFragment = "1.2.0"
 hiltWork = "1.2.0"
+kotlinTest = "1.6.10"
 kotlinxCollectionsImmutable = "0.3.5"
 mockk-mockk = "1.12.0"
 okhttp = "4.12.0"
@@ -67,6 +68,7 @@ daggerHiltAndroid = { module = "com.google.dagger:hilt-android", version.ref = "
 hiltCommon = { module = "androidx.hilt:hilt-common", version.ref = "hiltCommon" }
 hiltNavigationFragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
 hiltWork = { module = "androidx.hilt:hilt-work", version.ref = "hiltWork" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 mockk-mockk = { module = "io.mockk:mockk", version.ref = "mockk-mockk" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }

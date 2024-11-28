@@ -67,22 +67,24 @@
         <action
             android:id="@+id/action_profileFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_downloadedVideosFragment"
+            app:destination="@id/downloadedVideosFragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/courseDetailFragment"
         android:name="com.android.learnconnect.ui.coursedetail.CourseDetailFragment"
+        android:label="fragment_course_detail"
         tools:layout="@layout/fragment_course_detail">
-
-        <argument
-            android:name="courseId"
-            app:argType="string" />
-
-        <!-- CourseContentFragment'e geçiş -->
         <action
             android:id="@+id/action_courseDetailFragment_to_courseContentFragment"
             app:destination="@id/courseContentFragment" />
-
+        <argument
+            android:name="videoId"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -147,4 +149,10 @@
             android:id="@+id/action_registeredCoursesFragment_to_courseDetailFragment"
             app:destination="@id/courseDetailFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/downloadedVideosFragment"
+        android:name="com.android.learnconnect.ui.profile.DownloadedVideosFragment"
+        android:label="İndirilen Videolar"
+        tools:layout="@layout/fragment_downloaded_videos" />
 </navigation>

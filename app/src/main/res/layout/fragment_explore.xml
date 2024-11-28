@@ -39,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Kategoriler"
+                    android:text="@string/categories"
                     android:textColor="?attr/colorOnBackground"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -48,7 +48,7 @@
                     android:id="@+id/showAllCategories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tümünü Göster"
+                    android:text="@string/show_all"
                     android:textSize="14sp"
                     android:textColor="#3F51B5"
                     android:textStyle="bold"

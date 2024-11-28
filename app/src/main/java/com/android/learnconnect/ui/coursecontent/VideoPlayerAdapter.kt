@@ -1,5 +1,6 @@
 package com.android.learnconnect.ui.coursecontent
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.VideoItem
 
 class VideoPlayerAdapter(
-    private val videoList: List<VideoItem>,
+    private val context: Context,
+    private var videoList: List<VideoItem>,
     private val onItemClick: (VideoItem) -> Unit,
     private val onDownloadClick: (VideoItem) -> Unit
 ) : RecyclerView.Adapter<VideoPlayerAdapter.VideoViewHolder>() {
@@ -20,15 +22,16 @@ class VideoPlayerAdapter(
         return VideoViewHolder(view)
     }
 
+    fun submitList(newList: List<VideoItem>) {
+        videoList = newList
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         val video = videoList[position]
         holder.bind(video)
-        holder.itemView.setOnClickListener {
-            onItemClick(video)
-        }
-        holder.downloadButton.setOnClickListener {
-            onDownloadClick(video)
-        }
+        holder.itemView.setOnClickListener { onItemClick(video) }
+        holder.downloadButton.setOnClickListener { onDownloadClick(video) }
     }
 
     override fun getItemCount(): Int = videoList.size
