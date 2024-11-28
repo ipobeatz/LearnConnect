@@ -36,8 +36,9 @@ class DownloadedVideosFragment : Fragment() {
             return
         }
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            requireActivity().onBackPressed()
         }
+
 
         val adapter = DownloadedVideosAdapter(downloadedVideos) { videoPath ->
             playVideo(videoPath)
