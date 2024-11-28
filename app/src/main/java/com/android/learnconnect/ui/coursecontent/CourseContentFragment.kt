@@ -20,7 +20,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentCourseContentBinding
 import com.android.learnconnect.domain.entity.ResultData
@@ -83,14 +82,14 @@ class CourseContentFragment : Fragment() {
 
     private fun setupUI() {
 
-        // ExoPlayer ayarları
+
         player = ExoPlayer.Builder(requireContext()).build()
         binding.playerView.player = player
 
-        // Kontrolleri ayarla
+
         setupControls()
 
-        // İlk videoyu oynat
+
         if (videoList.isNotEmpty()) {
             playVideo(videoList.first())
         }
@@ -101,16 +100,16 @@ class CourseContentFragment : Fragment() {
                 requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
 
                 isEnabled = false
-                    requireActivity().onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
 
-        // Callback'i bu fragment'in OnBackPressedDispatcher'ına ekleyin
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun setupControls() {
-        // Oynat/Durdur Butonu
+
         val playPauseButton: ImageButton = binding.playerView.findViewById(R.id.exo_play_pause)
         playPauseButton.setOnClickListener {
             if (player?.isPlaying == true) {
@@ -122,19 +121,19 @@ class CourseContentFragment : Fragment() {
             }
         }
 
-        // Sonraki Butonu
+
         val nextButton: ImageButton = binding.playerView.findViewById(R.id.exo_next)
         nextButton.setOnClickListener {
             playNextVideo()
         }
 
-        // Hız Ayarlama Butonu
+
         val speedButton: ImageView = binding.playerView.findViewById(R.id.btn_speed)
         speedButton.setOnClickListener {
             showSpeedOptions()
         }
 
-        // Tam Ekran Butonu
+
         val fullScreenButton: ImageView = binding.playerView.findViewById(R.id.btn_fullscreen)
         toggleFullscreen()
     }
@@ -176,24 +175,22 @@ class CourseContentFragment : Fragment() {
 
     private fun toggleFullscreen() {
         if (isFullscreen) {
-            // Portre moda geçiş
+
             requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
 
-            // PlayerView boyutlarını güncelle
+
             val params = binding.playerView.layoutParams
             params.height = resources.getDimensionPixelSize(R.dimen.player_default_height)
             binding.playerView.layoutParams = params
 
-            // RecyclerView'ı görünür yap
 
         } else {
-            // Landscape moda geçiş
+
             requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             requireActivity().window.decorView.systemUiVisibility =
                 (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
 
-            // PlayerView boyutlarını güncelle
             val params = binding.playerView.layoutParams
             params.height = ViewGroup.LayoutParams.MATCH_PARENT
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -206,8 +203,6 @@ class CourseContentFragment : Fragment() {
         if (currentVideoIndex < videoList.size - 1) {
             currentVideoIndex++
             playVideo(videoList[currentVideoIndex])
-            // RecyclerView'da seçili öğeyi görünür yap
-            //binding.videoRecyclerView.scrollToPosition(currentVideoIndex)
         } else {
             Toast.makeText(requireContext(), "Son video oynatılıyor.", Toast.LENGTH_SHORT).show()
         }
@@ -219,7 +214,6 @@ class CourseContentFragment : Fragment() {
             prepare()
             playWhenReady = true
         }
-        // Oynat/Durdur butonunun ikonunu güncelle
         val playPauseButton: ImageButton = binding.playerView.findViewById(R.id.exo_play_pause)
         playPauseButton.setImageResource(android.R.drawable.ic_media_pause)
         if (videoItem.lastSecond != 0) {

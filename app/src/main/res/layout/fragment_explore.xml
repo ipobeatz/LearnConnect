@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- ScrollView -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +16,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Üstteki Görsel -->
             <ImageView
                 android:id="@+id/topImage"
                 android:layout_width="match_parent"
@@ -25,7 +23,6 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/course" />
 
-            <!-- Kategoriler Başlığı -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

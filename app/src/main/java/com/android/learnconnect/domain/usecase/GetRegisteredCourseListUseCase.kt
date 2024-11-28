@@ -11,12 +11,12 @@ class GetRegisteredCourseListUseCase @Inject constructor(
     private val repository: CourseRepository
 ) {
     suspend operator fun invoke(): Flow<ResultData<List<Course>>> = flow {
-        emit(ResultData.Loading()) // Verinin yüklenme durumunu göster
+        emit(ResultData.Loading())
         try {
-            val courses = repository.getRegisteredCourse() // Parametre olmadan çağır
+            val courses = repository.getRegisteredCourse()
             emit(repository.getRegisteredCourse())
         } catch (e: Exception) {
-            emit(ResultData.Error(e)) // Hata durumunu işleyin
+            emit(ResultData.Error(e))
         }
     }
 }

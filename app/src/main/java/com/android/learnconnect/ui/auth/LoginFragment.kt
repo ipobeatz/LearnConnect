@@ -1,11 +1,11 @@
 package com.android.learnconnect.ui.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.android.learnconnect.R
@@ -22,8 +22,7 @@ class LoginFragment @Inject constructor() : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,40 +32,40 @@ class LoginFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.backButton.setOnClickListener {
-            findNavController().navigateUp() // Bir önceki ekrana dön
+            findNavController().navigateUp()
         }
-        // FirebaseAuth başlatılıyor
         auth = FirebaseAuth.getInstance()
 
-        // Login butonuna tıklama işlemi
+
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            // Email ve şifre kontrolü
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 
-            // Firebase login işlemi
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Başarılı giriş
-                        Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
-                        // Başka bir fragment'e yönlendirme (örnek: HomeFragment)
-                        val navOptions = NavOptions.Builder()
-                            .setPopUpTo(R.id.welcomeFragment, true) // loginFragment'a kadar olan tüm fragmentları dahil ederek stack'ten çıkar
-                            .build()
 
-                        findNavController().navigate(R.id.action_loginFragment_to_exploreFragment, null, navOptions)
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+
+                        Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT)
+                            .show()
+
+                        val navOptions =
+                            NavOptions.Builder().setPopUpTo(R.id.welcomeFragment, true).build()
+
+                        findNavController().navigate(
+                            R.id.action_loginFragment_to_exploreFragment,
+                            null,
+                            navOptions
+                        )
                     } else {
-                        // Başarısız giriş
+
                         Toast.makeText(
-                            requireContext(),
-                            "Error: ${task.exception?.message}",
-                            Toast.LENGTH_LONG
+                            requireContext(), "Error: ${task.exception?.message}", Toast.LENGTH_LONG
                         ).show()
                     }
                 }
@@ -75,6 +74,6 @@ class LoginFragment @Inject constructor() : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // Bellek sızıntısını önlemek için binding'i null yap
+        _binding = null
     }
 }

@@ -9,7 +9,6 @@ import com.android.learnconnect.domain.usecase.GetRegisteredCourseListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +18,8 @@ class MyCourseViewModel @Inject constructor(
     private val getFavoriteCourseListUseCase: GetFavoriteCourseListUseCase
 ) : ViewModel() {
 
-    private val _registeredCourses = MutableStateFlow<ResultData<List<Course>>>(ResultData.Loading())
+    private val _registeredCourses =
+        MutableStateFlow<ResultData<List<Course>>>(ResultData.Loading())
     val registeredCourses: StateFlow<ResultData<List<Course>>> get() = _registeredCourses
 
     private val _favoriteCourses = MutableStateFlow<ResultData<List<Course>>>(ResultData.Loading())

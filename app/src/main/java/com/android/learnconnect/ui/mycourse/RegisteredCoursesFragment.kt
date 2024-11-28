@@ -1,5 +1,6 @@
 package com.android.learnconnect.ui.mycourse
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.learnconnect.databinding.FragmentRegisteredCoursesBinding
-import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -26,10 +25,10 @@ class RegisteredCoursesFragment : Fragment() {
     private val viewModel: MyCourseViewModel by viewModels()
     private var navigationListener: CourseNavigationListener? = null
 
-    override fun onAttach(context: android.content.Context) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (parentFragment is CourseNavigationListener) {
-            navigationListener = parentFragment as CourseNavigationListener
+        if (context is CourseNavigationListener) {
+            navigationListener = context
         }
     }
 
@@ -44,24 +43,29 @@ class RegisteredCoursesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = CourseAdapter { course ->
-            navigateToCourseDetail(course.id) // Kurs detayına yönlendir
+            navigateToCourseDetail(course.id)
         }
         binding.recyclerid.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerid.adapter = adapter
 
-        // Fetch data when fragment is created
         viewModel.fetchRegisteredCourses()
 
-        // Collect registered courses
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.registeredCourses.collectLatest { result ->
                     when (result) {
-                        is ResultData.Loading -> { /* Loading state */
+                        is ResultData.Loading -> {
                         }
 
                         is ResultData.Success -> {
-                            adapter.submitList(result.data)
+                            if (result.data.isEmpty()) {
+                                binding.recyclerid.visibility = View.GONE
+                                binding.emptyView.visibility = View.VISIBLE
+                            } else {
+                                binding.recyclerid.visibility = View.VISIBLE
+                                binding.emptyView.visibility = View.GONE
+                                adapter.submitList(result.data)
+                            }
                         }
 
                         is ResultData.Error -> {
@@ -79,5 +83,10 @@ class RegisteredCoursesFragment : Fragment() {
 
     private fun navigateToCourseDetail(courseId: String) {
         navigationListener?.onNavigateToCourseDetail(courseId)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

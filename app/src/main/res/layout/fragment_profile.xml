@@ -6,7 +6,6 @@
     >
 
 
-    <!-- Profil İkonu (Daire) -->
     <View
         android:id="@+id/profileCircle"
         android:layout_width="100dp"
@@ -18,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Profil Harfleri -->
     <TextView
         android:id="@+id/profileInitials"
         android:layout_width="wrap_content"
@@ -34,7 +32,6 @@
         app:layout_constraintStart_toStartOf="@id/profileCircle"
         app:layout_constraintEnd_toEndOf="@id/profileCircle" />
 
-    <!-- Hesap Adı Soyadı -->
 
 
     <TextView
@@ -50,7 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Dil Tercihi -->
     <TextView
         android:id="@+id/mailName"
         android:layout_width="wrap_content"

@@ -23,7 +23,6 @@ class RegisterFragment @Inject constructor() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // View Binding ile layout'u bağlama
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,7 +30,6 @@ class RegisterFragment @Inject constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Button işlemleri burada yapılır
         binding.btnRegister.setOnClickListener {
             val name = binding.etFirstName.text.toString().trim()
             val surname = binding.etLastName.text.toString().trim()
@@ -43,17 +41,15 @@ class RegisterFragment @Inject constructor() : Fragment() {
                 return@setOnClickListener
             }
 
-            val fullName = "$name $surname" // Ad ve Soyadı birleştir
+            val fullName = "$name $surname"
 
-            // Firebase'e kayıt işlemi
             FirebaseAuth.getInstance()
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Kullanıcı başarıyla oluşturuldu, ad soyadı ekleniyor
                         val user = FirebaseAuth.getInstance().currentUser
                         val profileUpdates = UserProfileChangeRequest.Builder()
-                            .setDisplayName(fullName) // Ad ve Soyadı burada ekliyoruz
+                            .setDisplayName(fullName)
                             .build()
 
                         user?.updateProfile(profileUpdates)?.addOnCompleteListener { updateTask ->
@@ -71,7 +67,7 @@ class RegisterFragment @Inject constructor() : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            findNavController().navigateUp() // Bir önceki ekrana dön
+            findNavController().navigateUp()
         }
     }
 

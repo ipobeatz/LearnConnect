@@ -11,8 +11,7 @@ import com.android.learnconnect.domain.entity.Course
 import com.bumptech.glide.Glide
 
 class HorizontalCourseAdapter(
-    private val courses: List<Course>,
-    private val listener: OnDashboardItemClickListener
+    private val courses: List<Course>, private val listener: OnDashboardItemClickListener
 ) : RecyclerView.Adapter<HorizontalCourseAdapter.CourseViewHolder>() {
 
     private var courseIdHashMapFavorite: HashMap<String, Boolean> = hashMapOf()
@@ -31,22 +30,15 @@ class HorizontalCourseAdapter(
             courseRating.text = course.rating.toString()
             coursePrice.text = "$${course.coursePrice}"
 
-            // Glide ile görseli yükle
-            Glide.with(itemView.context)
-                .load(course.imageUrl)
-                .placeholder(R.drawable.studio)
+
+            Glide.with(itemView.context).load(course.imageUrl).placeholder(R.drawable.studio)
                 .into(courseImage)
 
-            println("mcmc --> " + course.name + " -- " + courseIdHashMapFavorite[course.id])
-            // Favoriler butonuna tıklama işlemi
+
             favoriteButton.setImageResource(
                 if (courseIdHashMapFavorite[course.id] == true) R.drawable.love_svgrepo_com else R.drawable.love_svgrepo_com_2
             )
-
-            // Glide ile resmi yükle
-            Glide.with(itemView.context)
-                .load(course.imageUrl)
-                .placeholder(R.drawable.studio)
+            Glide.with(itemView.context).load(course.imageUrl).placeholder(R.drawable.studio)
                 .into(courseImage)
 
             val star1: ImageView = itemView.findViewById(R.id.star1)
@@ -56,20 +48,18 @@ class HorizontalCourseAdapter(
             val star5: ImageView = itemView.findViewById(R.id.star5)
 
 
-            // Yıldız doluluğunu ayarla
             val stars = listOf(star1, star2, star3, star4, star5)
-            val fullStars = course.rating.toInt() // Tam dolu yıldız sayısı
-            val halfStar = course.rating % 1 >= 0.5 // Yarım yıldız durumu
+            val fullStars = course.rating.toInt()
+            val halfStar = course.rating % 1 >= 0.5
 
             for (i in stars.indices) {
                 when {
-                    i < fullStars -> stars[i].setImageResource(R.drawable.fullstar) // Tam dolu yıldız
-                    i == fullStars && halfStar -> stars[i].setImageResource(R.drawable.halfstar) // Yarım yıldız
-                    else -> stars[i].setImageResource(android.R.drawable.btn_star_big_off) // Boş yıldız
+                    i < fullStars -> stars[i].setImageResource(R.drawable.fullstar)
+                    i == fullStars && halfStar -> stars[i].setImageResource(R.drawable.halfstar)
+                    else -> stars[i].setImageResource(android.R.drawable.btn_star_big_off)
                 }
             }
 
-            // Tıklama işlemi
             itemView.setOnClickListener {
                 listener.onItemClicked(course)
             }

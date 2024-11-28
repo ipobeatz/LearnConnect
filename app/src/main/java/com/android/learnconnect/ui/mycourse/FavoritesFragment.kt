@@ -10,11 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.learnconnect.R
 import com.android.learnconnect.databinding.FragmentFavoritesBinding
-import com.android.learnconnect.databinding.FragmentRegisteredCoursesBinding
 import com.android.learnconnect.domain.entity.ResultData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -38,7 +35,6 @@ class FavoritesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        // Binding burada başlatılıyor
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,7 +43,7 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = CourseAdapter { course ->
-            navigateToCourseDetail(course.id) // Tıklanan kursun detayına yönlendir
+            navigateToCourseDetail(course.id)
         }
         binding.favoriteCoursesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.favoriteCoursesRecyclerView.adapter = adapter
@@ -59,13 +55,13 @@ class FavoritesFragment : Fragment() {
                 viewModel.favoriteCourses.collectLatest { result ->
                     when (result) {
                         is ResultData.Loading -> {
-                            // Loading durumu için işlem yapılabilir
                         }
 
                         is ResultData.Success -> {
                             println("mcmc favorite is -> ${result.data}")
-                            adapter.submitList(result.data) // Verileri adapter'a gönderin
+                            adapter.submitList(result.data)
                         }
+
 
                         is ResultData.Error -> {
                             Toast.makeText(
@@ -79,17 +75,15 @@ class FavoritesFragment : Fragment() {
             }
         }
     }
+
     private fun navigateToCourseDetail(courseId: String) {
         navigationListener?.onNavigateToCourseDetail(courseId)
     }
 
 
-
-
-
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // Binding'i sıfırlayın
+        _binding = null
     }
 }
 

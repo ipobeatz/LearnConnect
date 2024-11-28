@@ -97,8 +97,7 @@ class ShowAllCategoriesFragment @Inject constructor() : Fragment() {
                 putSerializable(FILTERED_COURSE_DATA_LIST, filteredCourses as ArrayList<Course>)
             }
             findNavController().navigate(
-                R.id.action_showAllCategoriesFragment_to_filteredCoursesFragment,
-                bundle
+                R.id.action_showAllCategoriesFragment_to_filteredCoursesFragment, bundle
             )
         }
     }

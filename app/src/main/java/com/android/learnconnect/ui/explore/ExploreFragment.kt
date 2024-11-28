@@ -96,7 +96,6 @@ class ExploreFragment @Inject constructor() : Fragment(), OnDashboardItemClickLi
                         }
 
                         is ResultData.Loading -> {
-                            //(requireActivity() as MainActivity).showLoading()
                         }
                     }
                 }
@@ -110,7 +109,6 @@ class ExploreFragment @Inject constructor() : Fragment(), OnDashboardItemClickLi
                     viewModel.filteredCourseListData,
                     viewModel.filteredSecondCourseListData
                 ) { courseList, filteredList, filteredSecondData ->
-                    // Her iki Flow'dan gelen veriyi birleştir
                     Triple(courseList, filteredList, filteredSecondData)
                 }.collectLatest { (courseList, filteredList, filteredSecondData) ->
                     when {
@@ -171,40 +169,6 @@ class ExploreFragment @Inject constructor() : Fragment(), OnDashboardItemClickLi
         coursesRecyclerView.adapter = courseAdapter
     }
 
-    /*private fun setupCourseUI2(courses: List<Course>) {
-        if (courses.isNotEmpty()) {
-            val coursesRecyclerView = requireView().findViewById<RecyclerView>(R.id.popularCoursesRecyclerView2)
-            coursesRecyclerView.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-            courseAdapter = CoursesAdapter(
-                courses,
-                onItemClick = { course ->
-                    val action = ExploreFragmentDirections.actionExploreFragmentToCourseDetailFragment(
-                        courseId = course.id
-                    )
-                    findNavController().navigate(action)
-                },
-                onFavoriteClick = { course ->
-                    val newStatus = courseIdHashMapFavorite.get(course.id)
-                    viewModel.setCourseFavorite(course.id, newStatus ?: false)
-                    val message = if (newStatus == true) {
-                        "${course.name} favorilere eklendi."
-                    } else {
-                        "${course.name} favorilerden kaldırıldı."
-                    }
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-                }
-            )
-            courseAdapter?.setHashmap(courseIdHashMapFavorite)
-            coursesRecyclerView.adapter = courseAdapter
-        } else {
-            // Eğer liste boşsa yapılacaklar
-            Toast.makeText(requireContext(), "Kurs listesi boş", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-     */
 
     private fun setupCategoryUI(categories: List<Category>) {
         val categoriesRecyclerView =
@@ -216,7 +180,6 @@ class ExploreFragment @Inject constructor() : Fragment(), OnDashboardItemClickLi
                 .show()
         }
 
-        // Tüm Kategoriler Buttonu
         val showAllButton = requireView().findViewById<TextView>(R.id.showAllCategories)
         showAllButton.setOnClickListener {
             findNavController().navigate(R.id.action_exploreFragment_to_showAllCategoriesFragment)

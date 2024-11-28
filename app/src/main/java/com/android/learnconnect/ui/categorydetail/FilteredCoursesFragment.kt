@@ -20,7 +20,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FilteredCoursesFragment @Inject constructor() : Fragment() {
 
-    private val viewModel: FilteredCoursesViewModel by viewModels()
 
     @Inject
     lateinit var glide: RequestManager

@@ -10,8 +10,7 @@ import com.android.learnconnect.R
 import com.android.learnconnect.domain.entity.Category
 
 class CategoriesListAdapter(
-    private val categories: List<Category>,
-    private val onItemClick: (Category) -> Unit
+    private val categories: List<Category>, private val onItemClick: (Category) -> Unit
 ) : RecyclerView.Adapter<CategoriesListAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,7 +20,6 @@ class CategoriesListAdapter(
         fun bind(category: Category) {
             categoryTitle.text = category.title
 
-            // Tıklama işlemi
             itemView.setOnClickListener {
                 onItemClick(category)
             }
@@ -29,7 +27,8 @@ class CategoriesListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_list_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.category_list_item, parent, false)
         return CategoryViewHolder(view)
     }
 

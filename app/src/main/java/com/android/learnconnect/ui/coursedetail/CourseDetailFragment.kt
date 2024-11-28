@@ -84,8 +84,14 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
             }
         }
     }
+
     private fun setupRecyclerView() {
-        val videoAdapter = VideoPlayerAdapter(requireContext(), emptyList(), this::onVideoItemClick, this::onDownloadClick)
+        val videoAdapter = VideoPlayerAdapter(
+            requireContext(),
+            emptyList(),
+            this::onVideoItemClick,
+            this::onDownloadClick
+        )
         binding.courseContentRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = videoAdapter
@@ -94,12 +100,14 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
 
     private fun onVideoItemClick(videoItem: VideoItem) {
         if (isRegistered) {
-            val action = CourseDetailFragmentDirections
-                .actionCourseDetailFragmentToCourseContentFragment(videoItem.id)
+            val action =
+                CourseDetailFragmentDirections.actionCourseDetailFragmentToCourseContentFragment(
+                        videoItem.id
+                    )
             findNavController().navigate(action)
         } else {
-            // Kullanıcı kayıtlı değilse mesaj göster
-            Toast.makeText(requireContext(), "Derse kaydolmanız gerekiyor", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Derse kaydolmanız gerekiyor", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -107,8 +115,8 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
         if (isRegistered) {
             downloadVideo(requireContext(), videoItem.videoUrl, videoItem.title)
         } else {
-            // Kullanıcı kayıtlı değilse mesaj göster
-            Toast.makeText(requireContext(), "Derse kaydolmanız gerekiyor", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Derse kaydolmanız gerekiyor", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -129,22 +137,25 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
                 context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             val downloadId = downloadManager.enqueue(request)
 
-            // İndirme tamamlandığında bildirim yapmak için BroadcastReceiver
             val onComplete = object : BroadcastReceiver() {
                 override fun onReceive(ctxt: Context?, intent: Intent?) {
                     val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
                     if (id == downloadId) {
                         Toast.makeText(context, "$videoTitle indirildi!", Toast.LENGTH_LONG).show()
-                        context.unregisterReceiver(this) // Receiver'ı temizle
+                        context.unregisterReceiver(this)
                     }
                 }
             }
 
-            context.registerReceiver(onComplete, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+            context.registerReceiver(
+                onComplete,
+                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+            )
 
             Toast.makeText(context, "$videoTitle indiriliyor...", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
-            Toast.makeText(context, "İndirme başarısız oldu: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "İndirme başarısız oldu: ${e.message}", Toast.LENGTH_LONG)
+                .show()
         }
     }
 
@@ -153,8 +164,7 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
         isRegistered = course.isRegistered
         isFavorite = course.isFavorite
         (binding.courseContentRecyclerView.adapter as VideoPlayerAdapter).submitList(course.videoItem)
-        // Toast mesajını kaldırabilirsiniz
-        // binding.apply içinde aşağıdaki değişiklikleri yapın:
+
         binding.apply {
 
             detailCourseName.text = course.name
@@ -163,19 +173,19 @@ class CourseDetailFragment @Inject constructor() : Fragment() {
             glide.load(course.imageUrl).placeholder(R.drawable.studio).into(detailCourseImage)
 
             if (isRegistered) {
-                // Kullanıcı kursa kayıtlıysa butonu gizle ve overlay'i gizle
+
                 enrollButton.visibility = View.GONE
                 lockOverlay.visibility = View.GONE
             } else {
-                // Kullanıcı kayıtlı değilse butonu göster ve overlay'i göster
+
                 enrollButton.visibility = View.VISIBLE
                 lockOverlay.visibility = View.VISIBLE
                 enrollButton.text = "Kursa Kaydolun"
                 enrollButton.setOnClickListener {
                     viewModel.registerToCourse(courseId = course.id)
                     isRegistered = true
-                    binding.enrollButton.visibility = View.GONE // Kaydolduktan sonra butonu gizle
-                    binding.lockOverlay.visibility = View.GONE // Overlay'i gizle
+                    binding.enrollButton.visibility = View.GONE
+                    binding.lockOverlay.visibility = View.GONE
                     Toast.makeText(
                         requireContext(), "Kursa başarıyla kaydoldunuz!", Toast.LENGTH_SHORT
                     ).show()

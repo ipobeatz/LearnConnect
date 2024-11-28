@@ -26,7 +26,6 @@ class WelcomeFragment @Inject constructor() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        // Binding ile layout'u bağlama
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
     }

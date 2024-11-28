@@ -20,6 +20,7 @@
     <string name="language_preferences">Dil Tercihleri</string>
     <string name="about_learnconnect">LearnConnect Hakkında</string>
     <string name="downloaded_videos">Indirilen Videolar</string>
+    <string name="any_registered">Henüz kayıtlı kursunuz bulunmamaktadır</string>
     <string name="learnconnect_description">LearnConnect, kişisel ve profesyonel gelişiminiz için tasarlanmış bir öğrenme platformudur. Kullanıcılar, video derslere erişebilir, ilerlemelerini takip edebilir ve yeni beceriler kazanabilir. Ders videolarını indirerek çevrimdışı izleme imkanı sunar, böylece internet bağlantısı olmadığında da öğrenmeye devam edebilirsiniz. Basit, etkili ve kullanıcı dostu bir arayüzle öğrenmeye odaklanın ve hedeflerinize ulaşın!
 </string>
 </resources>

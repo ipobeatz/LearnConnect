@@ -1,14 +1,10 @@
 package com.android.learnconnect.ui.coursecontent
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.learnconnect.domain.entity.Course
 import com.android.learnconnect.domain.entity.ResultData
 import com.android.learnconnect.domain.usecase.GetCourseByIdUseCase
-import com.android.learnconnect.domain.usecase.RegisterCourseUseCase
-import com.android.learnconnect.domain.usecase.SetFavoriteCourseUseCase
 import com.android.learnconnect.domain.usecase.UpdateLastSecondOfVideoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,8 +24,7 @@ class CourseContentViewModel @Inject constructor(
         MutableStateFlow(ResultData.Loading())
 
     @VisibleForTesting
-    internal val courseData: StateFlow<ResultData<Course>> =
-        _courseData
+    internal val courseData: StateFlow<ResultData<Course>> = _courseData
 
     fun updateLastSecond(courseId: String, videoId: String, lastSecond: Int) {
         viewModelScope.launch {

@@ -29,6 +29,6 @@ class CategoryDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     companion object {
-        private const val CATEGORIES_JSON = "categories.json"
+        const val CATEGORIES_JSON = "categories.json"
     }
 }

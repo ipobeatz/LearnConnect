@@ -89,4 +89,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
+    testImplementation ("org.robolectric:robolectric:4.10")
+    testImplementation ("androidx.test:core:1.5.0")
 }

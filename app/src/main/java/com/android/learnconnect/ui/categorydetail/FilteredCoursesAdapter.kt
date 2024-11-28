@@ -29,7 +29,7 @@ class FilteredCoursesAdapter(
             coursePrice.text = "$${course.coursePrice}"
 
             glide.load(course.imageUrl)
-                .placeholder(R.drawable.studio) // Yer tutucu resim
+                .placeholder(R.drawable.studio)
                 .into(courseImage)
 
             itemView.setOnClickListener {

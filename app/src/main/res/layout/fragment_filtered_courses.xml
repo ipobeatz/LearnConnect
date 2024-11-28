@@ -21,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/categories" />
 
-    <!-- Filtrelenmiş Kurslar RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filteredCoursesRecyclerView"
         android:layout_width="0dp"

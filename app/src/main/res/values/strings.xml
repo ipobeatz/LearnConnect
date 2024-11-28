@@ -21,10 +21,11 @@
     <string name="language_preferences">Language</string>
     <string name="about_learnconnect">About LearnConnect</string>
     <string name="downloaded_videos">Downloaded Videos</string>
+    <string name="any_registered">You do not have any registered courses yet</string>
     <string name="learnconnect_description">LearnConnect is a learning platform designed for your personal and professional growth. Users can access video lessons, track their progress, and acquire new skills. It allows downloading videos for offline viewing, enabling learning even without an internet connection. Focus on learning with a simple, efficient, and user-friendly interface to achieve your goals!
 </string>
 
 
-
+    Henüz kayıtlı kursunuz bulunmamaktadır.
 
 </resources>

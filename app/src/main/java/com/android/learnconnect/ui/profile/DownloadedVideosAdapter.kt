@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.learnconnect.R
 
 class DownloadedVideosAdapter(
-    private val videoList: List<String>,
-    private val onVideoClick: (String) -> Unit
+    private val videoList: List<String>, private val onVideoClick: (String) -> Unit
 ) : RecyclerView.Adapter<DownloadedVideosAdapter.VideoViewHolder>() {
 
     inner class VideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val videoTitle = itemView.findViewById<TextView>(R.id.coursesName) // filtered_item_course.xml içinde courseTitle TextView
+        private val videoTitle = itemView.findViewById<TextView>(R.id.coursesName)
         fun bind(videoPath: String) {
             val fileName = videoPath.substringAfterLast("/")
             videoTitle.text = fileName

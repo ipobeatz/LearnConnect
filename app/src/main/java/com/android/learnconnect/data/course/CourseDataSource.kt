@@ -49,7 +49,11 @@ class CourseDataSource @Inject constructor(
         return ResultData.Success(courseDao.getFavoriteCourseList())
     }
 
-    override suspend fun setLastSecondOfVide(courseId: String, videoId: String, lastSecond: Int) : ResultData<*> {
+    override suspend fun setLastSecondOfVide(
+        courseId: String,
+        videoId: String,
+        lastSecond: Int
+    ): ResultData<*> {
         return try {
             ResultData.Success(courseDao.updateLastSecond(courseId, videoId, lastSecond))
         } catch (e: Exception) {

@@ -72,8 +72,7 @@ class MainAdapter(
         private val recyclerView: RecyclerView =
             itemView.findViewById(R.id.horizontalCourseRecyclerView)
 
-        private val titleTextView: TextView =
-            itemView.findViewById(R.id.courseTitleText)
+        private val titleTextView: TextView = itemView.findViewById(R.id.courseTitleText)
 
         fun bind(item: DashboardItem.HorizontalList) {
             val adapter = HorizontalCourseAdapter(item.items, listener)
@@ -99,8 +98,7 @@ class MainAdapter(
             courseDescription.text = course.description
             coursePrice.text = "$${course.coursePrice}"
 
-            glide.load(course.imageUrl).placeholder(R.drawable.studio) // Yer tutucu resim
-                .into(courseImage)
+            glide.load(course.imageUrl).placeholder(R.drawable.studio).into(courseImage)
 
             itemView.setOnClickListener {
                 listener.onItemClicked(course)

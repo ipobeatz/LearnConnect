@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- AppBarLayout ve Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             app:title="@string/course_details" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Scrollable Content -->
 
 
     <ImageView

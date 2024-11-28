@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.learnconnect.R
 
 class ProfileAdapter(
-    private val items: List<String>,
-    private val onItemClick: (String) -> Unit
+    private val items: List<String>, private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

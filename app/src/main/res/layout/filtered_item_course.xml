@@ -7,7 +7,6 @@
     android:layout_marginBottom="8dp"
     android:elevation="2dp">
 
-    <!-- Kurs Görseli -->
     <ImageView
         android:id="@+id/courseImage"
         android:layout_width="100dp"
@@ -16,14 +15,12 @@
         android:scaleType="centerCrop"
         android:src="@drawable/studio" />
 
-    <!-- Sağdaki Bilgiler -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <!-- Kurs Adı -->
         <TextView
             android:id="@+id/coursesName"
             android:layout_width="wrap_content"
@@ -34,7 +31,6 @@
             android:textColor="?attr/colorOnBackground"
             />
 
-        <!-- Kurs Açıklaması -->
         <TextView
             android:id="@+id/coursesDescription"
             android:layout_width="wrap_content"
@@ -46,7 +42,7 @@
             android:maxLines="2"
             android:ellipsize="end" />
 
-        <!-- Yıldız ve Rating kısmı -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +90,7 @@
                 android:src="@android:drawable/btn_star_big_off" />
         </LinearLayout>
 
-        <!-- Fiyat -->
+
         <TextView
             android:id="@+id/coursePrice"
             android:layout_width="wrap_content"
