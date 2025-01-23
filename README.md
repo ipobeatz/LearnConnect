@@ -66,12 +66,17 @@ Kurs detayları ve profil ekranları performans açısından optimize edildi, uy
 |:-:|:-:|:-:|
 | ![1](learn/image1.png) | ![2](learn/image2.png) | ![3](learn/image3.png) |
 
-| Product | Product Detail |  Orders
+| Home | Categories |  Course Detail
 |:-:|:-:|:-:|
-| ![4](medik/user/user5.png) | ![5](medik/user/user6.png) | ![6](medik/user/user7.png) |
+| ![4](learn/image4.png) | ![5](learn/image5.png) | ![6](learn/image6.png) |
 
-| Admin Login | Admin Product |  Admin Add Product  |  Admin Orders
+| Course Video Player | Video Download |  All Categories  |  Courses
 |:-:|:-:|:-:|:-:|
-| ![7](medik/user/user4.png) | ![8](medik/admin/admin1.png) | ![9](medik/admin/admin2.png) | ![10](medik/admin/admin3.png) |
+| ![7](learn/image7.png) | ![8](learn/image8.png) | ![9](learn/image9.png) | ![10](learn/image10.png) |
+
+| Home Detail | Saved Course |  Profile  |  Downloaded Courses
+|:-:|:-:|:-:|:-:|
+| ![11](learn/image11.png) | ![12](learn/image12.png) | ![13](learn/image13.png) | ![14](learn/image14.png) |
+
 
 
